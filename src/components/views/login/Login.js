@@ -3,17 +3,28 @@ import { useContext, useEffect } from "react"
 import { useState } from "react"
 import { ENDPOINTS } from "../../../consts/api"
 import { AuthContext, login } from "../../../contexts/auth"
-import { copyObject } from "../../../utils"
+import { copyObject, validateForm } from "../../../utils"
 import Button from "../../common/button"
 import Input from "../../common/input"
 import { useAuth } from '../../../hooks'
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import Switch from "../../common/switch"
 
 export const Login = ({ className, }) => {
 
-  const [user, dispatch] = useAuth();
+  const [user, userUpdate] = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState([
+    {
+      value: 'user',
+      label: 'Tipo de cuenta',
+      key: 'role',
+      type: 'text',
+      rules: {
+        required: true,
+      },
+      error: ''
+    },
     {
       value: '',
       label: 'Correo electrónico',
@@ -23,7 +34,7 @@ export const Login = ({ className, }) => {
         required: true,
         email: true,
       },
-      error: 'Direcciónd de correo electrónico no válida.'
+      error: ''
     },
     {
       value: '',
@@ -32,14 +43,25 @@ export const Login = ({ className, }) => {
       type: 'password',
       rules: {
         required: true,
-        min: 6,
+        min: 4,
       },
       error: ''
     },
   ])
 
-  const onSubmitLoginHandler = async (event, form) => {
+  useEffect(() => {
+    if (user.token)
+      return navigate('/');
+  }, [user])
+  
+  // useEffect(() => {
+  //   console.log('CAMBIA FORM', form)
+  // }, [form])
+
+  const onSubmitHandler = async (event, form) => {
     event.preventDefault();
+    if (!validateForm(form, setForm))
+      return false;
     let data = {}
     form.map(
       (input) => {
@@ -47,12 +69,11 @@ export const Login = ({ className, }) => {
       }
     )
     
-    await axios.post(ENDPOINTS.USER.LOGIN, data)
+    await axios.post(ENDPOINTS.AUTH.LOGIN, data)
     .then(({ data }) => {
       if (data.success) {
-        console.log(data.data.token)
-        dispatch(login(data.data));
-        navigate('/dashboard/profile')
+        userUpdate.login(data.data);
+        navigate('/dashboard/profile');
       }
     })
     .catch((error) => {
@@ -60,32 +81,53 @@ export const Login = ({ className, }) => {
     })
   }
 
-  const onChangeInputHandler = (event, index) => {
+  const onChangeInputHandler = (value, index) => {
     let auxForm = copyObject(form);
-    auxForm[index].value = event.target.value;
+    auxForm[index].value = value;
+    auxForm[index].error = '';
     setForm(auxForm);
   }
 
   return (
     <form
       className={className}
-      onSubmit={(event) => onSubmitLoginHandler(event, form)}
+      onSubmit={(event) => onSubmitHandler(event, form)}
+      noValidate
     >
       <legend>
         <h1>Incio de sesión</h1>
       </legend>
+
       {
-        form.map(
+        form.slice(1).map(
           (input, index) => (
-            <Input {...input} onChange={(event) => onChangeInputHandler(event, index)} />
+            <Input {...input} onChange={(event) => onChangeInputHandler(event.target.value, index + 1)} />
           )
         )
       }
-      <Button
-        onClick={(event) => onSubmitLoginHandler(event, form)}
-      >
-        Login
-      </Button>
+      
+      <label className="switch_label">
+        <span className={form[0].value === 'association' ? null : 'nonSelected'}>Asociación</span>
+        <Switch
+          value={form[0].value}
+          onChange={(checked) => onChangeInputHandler(checked, 0)}
+          on='user'
+          off='association'
+        />
+        <span className={form[0].value === 'user' ? null : 'nonSelected'}>Usuario</span>
+      </label>
+
+      <footer>
+        <Link to="/registro">
+          ¿No tienes cuenta? Regístrate aquí.
+        </Link>
+        <Button
+          secondary
+          type="submit"
+        >
+          Siguiente
+        </Button>
+      </footer>
     </form>
   )
 }

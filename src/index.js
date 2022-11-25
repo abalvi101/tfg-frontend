@@ -1,14 +1,23 @@
+import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { apiURL } from './consts/api';
+import { AppStateProvider } from './contexts/app-state/';
 import { AuthProvider } from './contexts/auth';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+axios.defaults.baseURL = apiURL;
+console.log('baseurl')
+
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <App />
+      <AppStateProvider>
+        <App />
+      </AppStateProvider>
     </AuthProvider>
   </React.StrictMode>
 );

@@ -1,5 +1,5 @@
 import AuthContext from "./AuthContext";
 import AuthProvider from "./AuthProvider";
-import { login, logout } from "./actions";
+import actions from "./actions";
 
-export { AuthContext, AuthProvider, login, logout };
+export { AuthContext, AuthProvider, actions };

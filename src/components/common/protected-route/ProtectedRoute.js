@@ -1,12 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { LOCAL_STORAGE_TOKEN } from "../../../consts/api";
+import { useAuth } from "../../../hooks";
 
-const ProtectedRoute = (props) => {
-  console.log(props);
-  if (!localStorage.getItem(LOCAL_STORAGE_TOKEN)) {
+const ProtectedRoute = () => {
+  const [user, _] = useAuth()
+  if (!user.token) {
     // user is not authenticated
-    console.log('NO AUTH');
-    return <Navigate to="/" />;
+    return <Navigate to="/login" />;
   }
   return <Outlet/>;
 };

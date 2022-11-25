@@ -1,5 +1,6 @@
 const lightTheme = {
   background: '#fafafa',
+  backgroundLight: '#fff',
   primaryFont: '#1f1f1f',
   secondaryFont: '#bababa',
   intermediateFont: '#969696',

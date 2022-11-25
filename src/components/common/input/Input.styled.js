@@ -13,8 +13,9 @@ const Input = styled(UnstyledInput)`
     border: 0;
     padding: ${props => props.error ? '0.75rem 1.15rem' : '0.8rem 1.2rem'};
     outline: none;
+    font-size: 1rem;
     transition-duration: 0.6s;
-    border: ${props => props.error ? '0.05px solid ' + props.theme.error : 'none'};
+    border: ${props => props.error ? `0.05px solid ${props.theme.error}` : 'none'};
   }
   input:focus {
     /* border: 0.05rem solid #ededed;
@@ -47,6 +48,7 @@ const Input = styled(UnstyledInput)`
     color: ${props => props.theme.error};
     font-size: 0.9rem;
     margin-top: 0.6rem;
+    transition: 5s ease;
   }
   .chapuza {
     display: ${props => props.value ? 'initial' : 'none'};
@@ -62,6 +64,20 @@ const Input = styled(UnstyledInput)`
   }
   input:focus ~ .chapuza {
     display: initial;
+  }
+  .focus {
+    height: 2px;
+    width: 0;
+    background-color: ${props => props.error ? props.theme.error : props.theme.primaryLight};
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin: 0;
+    transition: 0.8s ease;
+  }
+  input:focus ~ .focus {
+    width: 100%;
+    left: 0;
   }
 `
 

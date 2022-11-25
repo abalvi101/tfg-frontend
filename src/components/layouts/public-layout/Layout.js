@@ -1,20 +1,27 @@
+import { Outlet } from "react-router-dom"
+import { useAppState } from "../../../hooks"
+import Footer from "../footer/Footer.styled";
+import Header from "../header"
 
-export const Layout = ({ className, children, ...props }) => {
+export const Layout = ({ className, ...props }) => {
+  
+  const [appState, appStateUpdate] = useAppState();
+
   return (
     <main className={className}>
-      <header>
-        TFG Protectoras
-        <ul>
-          <li>Inicio</li>
-          <li>Adopciones</li>
-        </ul>
-      </header>
+      <Header />
       <section className="main-body">
-        {children}
+        <div className="view">
+          {
+            appState.loading
+            ? 'Cargando'
+            : null
+          }
+          <Outlet />
+        </div>
       </section>
-      <footer>
-        Footer vasilon
-      </footer>
+      {/* <img src="background/Background.svg" /> */}
+      <Footer/>
     </main>
   )
 }

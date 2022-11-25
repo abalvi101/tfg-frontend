@@ -1,49 +1,57 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import GlobalStyle from "./theme/GlobalStyle";
 import Layout from "./components/layouts/public-layout";
 import Error from "./components/views/error";
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
 } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import lightTheme from "./theme/lightTheme";
 import darkTheme from "./theme/darkTheme";
 import Login from "./components/views/login";
 import Register from "./components/views/register";
-import { AuthContext, login } from "./contexts/auth";
-import Button from "./components/common/button";
-import { apiURL, ENDPOINTS, LOCAL_STORAGE_TOKEN } from "./consts/api";
+import Adoptions from "./components/views/adoptions";
+import { apiURL } from "./consts/api";
 import ProtectedRoute from "./components/common/protected-route/ProtectedRoute";
 import { useAuth } from "./hooks";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <div>Hello world!</div>,
-    errorElement: <Error />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/registro",
-    element: <Register />,
-  },
-  {
-    path: "/dashboard",
-    element: <ProtectedRoute />,
+    path: '',
+    element: <Layout />,
     children: [
       {
-        path: "profile",
-        element: <div>Perfil</div>,
+        path: "/",
+        element: <h3>Home</h3>,
+        errorElement: <Error />,
       },
       {
-        path: "favourites",
-        element: <h1>Favoritos</h1>,
+        path: "/adopciones",
+        element: <Adoptions />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/registro",
+        element: <Register />,
+      },
+      {
+        path: "/dashboard",
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: "profile",
+            element: <div>Perfil</div>,
+          },
+          {
+            path: "favourites",
+            element: <h1>Favoritos</h1>,
+          }
+        ]
       }
     ]
   }
@@ -51,32 +59,31 @@ const router = createBrowserRouter([
 
 function App() {
 
-  const [user, dispatch] = useAuth();
+  const [user, userUpdate] = useAuth();
   const [theme, setTheme] = useState(true);
 
   useEffect(() => {
-    axios.defaults.baseURL = apiURL;
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN)}`;
-    if (localStorage.getItem(LOCAL_STORAGE_TOKEN));
-      getUser(localStorage.getItem(LOCAL_STORAGE_TOKEN));
-    // axios.defaults.headers.post['Content-Type'] = 'application/json';
-    // axios.defaults.withCredentials = true;
-    // axios.defaults.headers.common['X-CSRF-TOKEN'] = token_var;
+    getUser();
   }, [])
 
   useEffect(() => {
-    console.log(user);
+    // console.log('cambia user', user);
     axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
   }, [user])
 
-  const getUser = async (token) => {
-    await axios.post(ENDPOINTS.USER.GET_USER, {token})
-    .then(({ data }) => {
-      console.log('Se recogió el token bien :D')
-      dispatch(login(data.data));
+  const getUser = () => {
+    if (!user.token) return false
+    axios.get('user/get')
+    .then(({data}) => {
+      console.log('RESPONSE AUTH', data);
+      if (data.success) {
+        userUpdate.login(data.data);
+      } else {
+        userUpdate.logout();
+      }
     })
     .catch((error) => {
-      console.log(error);
+      console.log('ERROR AUTH', error);
     })
   }
 
@@ -84,12 +91,9 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme ? lightTheme : darkTheme}>
         <GlobalStyle />
-        <Layout>
+        {/* <Layout> */}
           <RouterProvider router={router} />
-          <Button onClick={() => dispatch(login({name: 'Paco', surname: 'Sánchez', email: 'samuelito@gmail.com'}))}>
-            Cambiar user!
-          </Button>
-        </Layout>
+        {/* </Layout> */}
       </ThemeProvider>
     </div>
   );

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Header from "../header";
 import { Layout as UnstyledLayout } from "./Layout";
 
 export const Layout = styled(UnstyledLayout)`
@@ -6,14 +7,17 @@ export const Layout = styled(UnstyledLayout)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  header {
-    background-color: ${props => props.theme.primary};
-    color: palevioletred;
-  }
   .main-body {
     flex-grow: 1;
+    background-image: url('background/Background.svg');
+    background-attachment: local;
+    background-position: bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
   }
-  footer {
-    justify-self: flex-end
+  .view {
+    max-width: 1440px;
+    margin: auto;
+    padding: 2rem 4.2%;
   }
 `
