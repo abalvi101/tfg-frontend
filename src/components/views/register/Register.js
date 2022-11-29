@@ -189,9 +189,7 @@ export const Register = ({ className, }) => {
         (input) => input.key === 'city_id'
       );
       if (index > -1) {
-        auxForm[index].options = cities.filter(
-          (city) => city.province_id === form.association[4].value
-        ).map(
+        auxForm[index].options = cities.map(
           (city) => ({
             name: city.name,
             key: city.id,

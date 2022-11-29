@@ -1,27 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const Select = ({ className, label, value, options, onChange, error }) => {
 
+  const inputRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
   const [search, setSearch] = useState('');
   const [filteredOptions, setFilteredOptions] = useState([]);
 
   useEffect(() => {
-    console.log('USEEFFECT DEL SELECT')
-    onChange(1);
   }, [])
 
   useEffect(() => {
     filterOptions();
-    console.log('cambia opt');
   }, [options])
 
   useEffect(() => {
-    console.log('BUSCANDO SELECTED', value, options);
     let selectedOption = options?.find((option) => option.value === value)?.name;
     if (selectedOption)
       setSearch(selectedOption);
-      console.log('SELECTED', selectedOption);
   }, [value, options])
 
   useEffect(() => {
@@ -47,6 +43,7 @@ export const Select = ({ className, label, value, options, onChange, error }) =>
     <div className={className}>
       <input
         className={`input ${isFocused ? 'focused' : null}`}
+        ref={inputRef}
         value={search}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -66,7 +63,8 @@ export const Select = ({ className, label, value, options, onChange, error }) =>
                 <li
                   className={`option ${value === option.value ? 'selected' : null}`}
                   key={option.key}
-                  onClick={() => {console.log('EJECUTANDO ONCHANGE', option.value)}}
+                  onMouseDown={(event) => event.preventDefault()}
+                  onClick={() => {onChange(option.value); inputRef.current.blur()}}
                 >
                   {option.name}
                 </li>

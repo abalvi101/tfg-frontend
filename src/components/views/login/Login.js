@@ -53,10 +53,6 @@ export const Login = ({ className, }) => {
     if (user.token)
       return navigate('/');
   }, [user])
-  
-  // useEffect(() => {
-  //   console.log('CAMBIA FORM', form)
-  // }, [form])
 
   const onSubmitHandler = async (event, form) => {
     event.preventDefault();
@@ -82,6 +78,7 @@ export const Login = ({ className, }) => {
   }
 
   const onChangeInputHandler = (value, index) => {
+    console.log('PACOOOO')
     let auxForm = copyObject(form);
     auxForm[index].value = value;
     auxForm[index].error = '';
@@ -101,7 +98,7 @@ export const Login = ({ className, }) => {
       {
         form.slice(1).map(
           (input, index) => (
-            <Input {...input} onChange={(event) => onChangeInputHandler(event.target.value, index + 1)} />
+            <Input {...input} onChange={(value) => onChangeInputHandler(value, index + 1)} />
           )
         )
       }

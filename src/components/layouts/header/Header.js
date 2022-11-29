@@ -1,12 +1,28 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import Button from "../../common/button"
-import { useAuth } from "../../../hooks";
+import { useAuth, useClickOutside } from "../../../hooks";
 
 export const Header = ({ className, }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [user, userUpdate] = useAuth();
+  const userMenuRef = useRef(null);
+  const [isUserMenuVisible, setIsUserMenuVisible] = useState(false);
+
+  const openUserMenu = () => {
+    setIsUserMenuVisible(true);
+  }
+
+  const closeUserMenu = () => {
+    setIsUserMenuVisible(false);
+  }
+
+  useClickOutside(userMenuRef, closeUserMenu);
+
+  useEffect(() => {
+    console.log(isUserMenuVisible ? 'VISIBLE' : 'NO VISIBLE')
+  }, [isUserMenuVisible])
 
   const routes = [
     {
@@ -48,9 +64,34 @@ export const Header = ({ className, }) => {
         <section className="auth">
           {
             user.token
-            ? <Button onClick={userUpdate.logout}>
-                Cerrar sesión
-              </Button>
+            ? <Fragment>
+                {/* <Button onClick={userUpdate.logout}>
+                  Cerrar sesión
+                </Button> */}
+                <section className="user">
+                  <span>{user.name}</span>
+                  <img
+                    onClick={openUserMenu}
+                    src="icons/user.svg"
+                    alt="User icon"
+                    className="user_icon"
+                  />
+                  <ul
+                    className={`user_menu ${isUserMenuVisible ? null : 'hidden'}`}
+                    ref={userMenuRef}
+                  >
+                    <li onClick={closeUserMenu}>
+                      <Link to='/'>Perfil</Link>
+                    </li>
+                    <li onClick={closeUserMenu}>
+                      <Link to='/'>Ajustes</Link>
+                    </li>
+                    <li onClick={closeUserMenu}>  
+                      <Link onClick={userUpdate.logout}>Cerrar sesión</Link>
+                    </li>
+                  </ul>
+                </section>
+              </Fragment>
             : <Fragment>
                 <Button
                   onClick={() => navigate('/login')}
@@ -65,7 +106,6 @@ export const Header = ({ className, }) => {
                 </Button>
               </Fragment>
           }
-          
         </section>
       </div>
     </header>

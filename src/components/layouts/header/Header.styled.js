@@ -73,8 +73,47 @@ const Header = styled(UnstyledHeader)`
     left: 0;
   }
   .auth {
+    height: 100%;
     display: flex;
+    align-items: center;
     gap: 2rem;
+  }
+  .user {
+    position: relative;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    gap: 1rem;
+  }
+  .user_icon {
+    width: 1.8rem;
+    cursor: pointer;
+  }
+  .user_menu {
+    position: absolute;
+    top: 100%;
+    right: -1rem;
+    list-style-position: inside;
+    text-align: right;
+    z-index: 10;
+    padding: 1rem;
+    background-color: ${props => props.theme.background};
+    min-width: 12rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    
+    transition: 2s;
+  }
+
+  .user_menu a {
+    text-decoration: none;
+  }
+
+  .user_menu.hidden {
+    display: none;
+    height: 0;
+    transition: 2s;
   }
 `
 
