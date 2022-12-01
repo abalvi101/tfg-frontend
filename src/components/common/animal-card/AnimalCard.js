@@ -1,6 +1,6 @@
-export const AnimalCard = ({ className, image, name, gender, age, size, breed }) => {
+export const AnimalCard = ({ className, image, name, gender, age, size, breed, onClick }) => {
   return (
-    <section className={className}>
+    <section className={className} onClick={onClick}>
       <img
         className="imagen"
         src={image}

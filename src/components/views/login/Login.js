@@ -69,7 +69,6 @@ export const Login = ({ className, }) => {
     .then(({ data }) => {
       if (data.success) {
         userUpdate.login(data.data);
-        navigate('/dashboard/profile');
       }
     })
     .catch((error) => {

@@ -277,12 +277,10 @@ export const Register = ({ className, }) => {
   }
 
   const onChangeInputHandler = (value, index) => {
-    console.log('CAMBIAMOS EL FORM', form, value, index);
     let auxForm = copyObject(form);
     auxForm[role][index].value = value;
     auxForm[role][index].error = '';
     setForm(auxForm);
-    console.log('FORM CAMBIADO', auxForm);
   }
 
   return (
@@ -300,7 +298,7 @@ export const Register = ({ className, }) => {
           (input, index) => (
             <Input
               {...input}
-              onChange={(value) => {console.log('ONCHANGE :D', value, index); onChangeInputHandler(value, index)}}
+              onChange={(value) => onChangeInputHandler(value, index)}
             />
           )
         )

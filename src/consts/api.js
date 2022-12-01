@@ -9,6 +9,13 @@ export const ENDPOINTS = {
   LOCATION: {
     GET_PROVINCES: 'location/getProvinces',
     GET_CITIES: 'location/getCities',
+  },
+  ANIMAL: {
+    GET_FILTERED_ANIMALS: 'animals/getFilteredAnimals',
+    GET_ANIMAL_INFO: 'animals/getAnimalInfo',
+    GET_SPECIES: 'animals/getSpecies',
+    GET_BREEDS: 'animals/getBreeds',
+    GET_SIZES: 'animals/getSizes',
   }
 };
 

@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import Select from "../select/Select.styled";
 
-export const Input = ({ className, label, error, type, onChange, ...props }) => {
+export const Input = ({ className, label, error, type, onChange = () => {}, ...props }) => {
   const inputRef = useRef(null);
 
   const getType = (type) => {

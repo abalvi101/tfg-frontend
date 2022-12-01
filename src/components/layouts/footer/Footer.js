@@ -3,11 +3,11 @@ export const Footer = ({ className, }) => {
     <footer className={className}>
       <div className="content">
         <section className="rrss">
-          <img className="icon facebook" src="icons/facebook.svg"/>
-          <img className="icon instagram" src="icons/instagram.svg"/>
-          <img className="icon twitter" src="icons/twitter.svg"/>
+          <img className="icon facebook" src="/icons/facebook.svg"/>
+          <img className="icon instagram" src="/icons/instagram.svg"/>
+          <img className="icon twitter" src="/icons/twitter.svg"/>
         </section>
-        <section>Logo y nombre</section>
+        <section className="brand">Logo y nombre</section>
         <section className="links">
           <ul>
             <li>Contacto</li>

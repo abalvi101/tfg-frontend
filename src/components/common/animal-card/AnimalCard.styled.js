@@ -6,8 +6,10 @@ const AnimalCard = styled(UnstyledAnimalCard)`
   border-radius: 5px;
   background-color: ${props => props.theme.background};
   /* width: 100%; */
-  padding: 1rem;
+  padding: 6%;
   position: relative;
+  cursor: pointer;
+
   img.imagen {
     object-fit: cover;
     width: 100%;

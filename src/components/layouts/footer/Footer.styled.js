@@ -23,6 +23,26 @@ const Footer = styled(UnstyledFooter)`
     text-align: right;
     list-style-position: inside;
   }
+
+@media only screen and (max-width: 425px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+  }
+  .brand {
+    order: 1;
+  }
+  .rrss {
+    order: 2;
+  }
+  .links {
+    order: 3;
+  }
+  .links > ul {
+    text-align: center;
+  }
+}
 `
 
 export default Footer;

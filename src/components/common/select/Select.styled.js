@@ -3,6 +3,7 @@ import { Select as UnstyledSelect } from "./Select";
 
 const Select = styled(UnstyledSelect)`
   position: relative;
+  width: 100%;
 
   .input {
     width: 100%;

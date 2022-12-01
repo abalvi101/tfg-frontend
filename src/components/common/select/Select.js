@@ -64,7 +64,11 @@ export const Select = ({ className, label, value, options, onChange, error }) =>
                   className={`option ${value === option.value ? 'selected' : null}`}
                   key={option.key}
                   onMouseDown={(event) => event.preventDefault()}
-                  onClick={() => {onChange(option.value); inputRef.current.blur()}}
+                  onClick={() => {
+                    onChange(option.value);
+                    setSearch('');
+                    inputRef.current.blur();
+                  }}
                 >
                   {option.name}
                 </li>

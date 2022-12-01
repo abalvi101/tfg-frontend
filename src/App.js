@@ -13,9 +13,11 @@ import darkTheme from "./theme/darkTheme";
 import Login from "./components/views/login";
 import Register from "./components/views/register";
 import Adoptions from "./components/views/adoptions";
-import { apiURL } from "./consts/api";
+import { apiURL, ENDPOINTS } from "./consts/api";
 import ProtectedRoute from "./components/common/protected-route/ProtectedRoute";
 import { useAuth } from "./hooks";
+import Profile from "./components/views/profile/Profile.styled";
+import Animal from "./components/views/animal/Animal.styled";
 
 const router = createBrowserRouter([
   {
@@ -40,18 +42,18 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/dashboard",
+        path: "/perfil",
         element: <ProtectedRoute />,
         children: [
           {
-            path: "profile",
-            element: <div>Perfil</div>,
+            path: "",
+            element: <Profile />,
           },
-          {
-            path: "favourites",
-            element: <h1>Favoritos</h1>,
-          }
         ]
+      },
+      {
+        path: "/animal/:animalID",
+        element: <Animal />,
       }
     ]
   }
@@ -73,7 +75,7 @@ function App() {
 
   const getUser = () => {
     if (!user.token) return false
-    axios.get('user/get')
+    axios.get(ENDPOINTS.AUTH.GET_USER)
     .then(({data}) => {
       console.log('RESPONSE AUTH', data);
       if (data.success) {

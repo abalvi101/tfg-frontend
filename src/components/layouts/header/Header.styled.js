@@ -1,12 +1,15 @@
 import styled from "styled-components";
+import Button from "../../common/button";
 import { Header as UnstyledHeader } from "./Header";
 
 const Header = styled(UnstyledHeader)`
   box-shadow: 0 3px 6px rgba(227, 227, 227, 33%);
   padding: 0 4.2%;
+  position: relative;
   
   * {
     font-family: Sora;
+    user-select: none;
   }
   .content {
     max-width: 1440px;
@@ -17,9 +20,14 @@ const Header = styled(UnstyledHeader)`
     height: 56px;
   }
   .menu {
+    flex-grow: 1;
     display: flex;
     gap: 6rem;
     height: 100%;
+  }
+  .menu_icon {
+    width: 1.6rem;
+    display: none;
   }
   h1 {
     font-size: 1.6rem;
@@ -27,11 +35,16 @@ const Header = styled(UnstyledHeader)`
     display: flex;
     align-items: center;
   }
+  .links_wrapper {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    height: 100%;
+  }
   .links {
     display: flex;
     align-items: center;
     /* gap: 3rem; */
-    height: 100%;
   }
   .links > li {
     position: relative;
@@ -84,10 +97,10 @@ const Header = styled(UnstyledHeader)`
     height: 100%;
     align-items: center;
     gap: 1rem;
+    cursor: pointer;
   }
   .user_icon {
     width: 1.8rem;
-    cursor: pointer;
   }
   .user_menu {
     position: absolute;
@@ -98,7 +111,7 @@ const Header = styled(UnstyledHeader)`
     z-index: 10;
     padding: 1rem;
     background-color: ${props => props.theme.background};
-    min-width: 12rem;
+    min-width: 13rem;
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
@@ -114,6 +127,84 @@ const Header = styled(UnstyledHeader)`
     display: none;
     height: 0;
     transition: 2s;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .links_wrapper {
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      z-index: 5;
+      height: auto;
+      width: 220px;
+      /* padding-right: 1rem; */
+      background-color: ${props => props.theme.background};
+    }
+    .links {
+      background-color: ${props => props.theme.background};
+      flex-direction: column;
+      transition: 2s;
+      align-items: flex-end;
+    }
+    .links_wrapper.hidden {
+      height: 0;
+      overflow: hidden;
+    }
+    .links > li {
+      width: 100%;
+    }
+    .links > li > a {
+      padding: 0.8rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .menu {
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+    .menu_icon {
+      display: initial;
+    }
+    div.selected {
+      height: 0;
+      width: 2px;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      left: calc(100% - 2px);
+      transition: 0.6s ease;
+      background-color: ${props => props.theme.primary};
+      /* z-index: 2; */
+    }
+    a.selected ~ div.selected {
+      height: 100%;
+      width: 2px;
+      top: 0;
+      left: calc(100% - 2px);
+    }
+    .auth {
+      justify-content: flex-end;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0;
+    }
+    .auth > ${Button} {
+      margin: 0.8rem;
+    }
+    .user {
+      padding: 0.8rem;
+    }
+    .user_menu * {
+      font-size: 0.8rem;
+    }
+    .user_menu {
+      width: 220px;
+      right: 0;
+      padding-right: 2rem
+      /* background-color: ${props => props.theme.backgroundLight}; */
+      /* background-color: rgba(255, 191, 105, 0.5); */
+    }
   }
 `
 
