@@ -1,25 +1,28 @@
-export const AnimalCard = ({ className, image, name, gender, age, size, breed, onClick }) => {
+export const AnimalCard = ({ className, animal, onClick }) => {
   return (
     <section className={className} onClick={onClick}>
       <img
         className="imagen"
-        src={image}
+        src={animal.image ? animal.image : '/icons/footprint.svg'}
       />
       <header>
-        <h3>{name}</h3>
-        <img src={`icons/${gender ? 'male' : 'female'}.svg`} />
+        <h3>{animal.name}</h3>
+        <img src={`/icons/${animal.gender ? 'male' : 'female'}.svg`} />
       </header>
       <div className="body">
         <ul>
-          <li>Edad: {age} años</li>
-          <li>Tamaño: {size}</li>
-          <li>Raza: {breed}</li>
+          <li>Edad: {animal.age} años</li>
+          <li>Tamaño: {animal.size.name}</li>
+          <li>Raza: {animal.breed.name}</li>
         </ul>
       </div>
-      <img
-        className="acogida"
-        src="icons/acogida.svg"
-      />
+      {
+        animal.fostering &&
+        <img
+          className="acogida"
+          src="/icons/acogida.svg"
+        />
+      }
     </section>
   )
 }

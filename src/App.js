@@ -23,11 +23,11 @@ const router = createBrowserRouter([
   {
     path: '',
     element: <Layout />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
         element: <h3>Home</h3>,
-        errorElement: <Error />,
       },
       {
         path: "/adopciones",
@@ -71,13 +71,13 @@ function App() {
   useEffect(() => {
     // console.log('cambia user', user);
     axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
   }, [user])
 
   const getUser = () => {
     if (!user.token) return false
     axios.get(ENDPOINTS.AUTH.GET_USER)
     .then(({data}) => {
-      console.log('RESPONSE AUTH', data);
       if (data.success) {
         userUpdate.login(data.data);
       } else {
@@ -86,6 +86,7 @@ function App() {
     })
     .catch((error) => {
       console.log('ERROR AUTH', error);
+      userUpdate.logout();
     })
   }
 

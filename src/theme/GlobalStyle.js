@@ -22,18 +22,16 @@ const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.primaryFont};
     font-family: Lusitana;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: Sora;
-    margin: 0;
   }
   body {
     background-color: ${props => props.theme.background};
-    margin: 0;
   }
   ul, ol {
-    margin: 0;
-    padding: 0;
     list-style: none;
   }
 `;

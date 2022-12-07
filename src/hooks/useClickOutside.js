@@ -8,7 +8,6 @@ export const useClickOutside = ( ref, onClickOutside ) => {
      */
     const handleClickOutside = (event) => {
       if (ref.current && !ref.current.contains(event.target)) {
-        console.log('CLICKA FUERAAAA')
         onClickOutside();
       }
     }

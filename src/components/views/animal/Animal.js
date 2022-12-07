@@ -23,9 +23,11 @@ export default ({ className }) => {
   return (
     <div className={className}>
       <header className="header">
-        <h1>{animal.name}</h1>
-        <img src={`/icons/${animal.gender ? 'male' : 'female'}.svg`} />
-        <h5>{animal.birthday}</h5>
+        <span className='name'>
+          <h1>{animal.name}</h1>
+          <img src={`/icons/${animal.gender ? 'male' : 'female'}.svg`} />
+        </span>
+        <h5 className="association">{animal.association?.name}</h5>
       </header>
       <section className="info_wrapper">
         {
@@ -40,8 +42,24 @@ export default ({ className }) => {
             {animal.breed && <li>Raza: {animal.breed}</li>}
             <li>Se encuentra en {animal.city}, {animal.province}</li>
             <li>En manos de la asociación {animal.association?.name}</li>
+            {
+              animal.diseases?.length &&
+              <section className="diseases">
+                <p>{animal.name} tiene las siguientes enfermedades:</p>
+                <ul>
+                  {animal.diseases.map(
+                    (disease) => (
+                      <li className="disease">
+                        <h5>{disease.name} ({disease.chronic ? 'crónico' : 'temporal'})</h5>
+                        <p>{disease.description}</p>
+                        <p>{disease.treatment}</p>
+                      </li>
+                    )
+                  )}
+                </ul>
+              </section>  
+            }
           </ul>
-          
         </section>
       </section>
     </div>

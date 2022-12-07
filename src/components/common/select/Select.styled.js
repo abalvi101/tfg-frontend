@@ -19,7 +19,7 @@ const Select = styled(UnstyledSelect)`
   }
   .options_container {
     height: 0;
-    max-height: 300px;
+    max-height: 200px;
     overflow-y: scroll;
     position: absolute;
     z-index: 2;

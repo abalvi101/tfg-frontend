@@ -206,27 +206,6 @@ export const Register = ({ className, }) => {
       return navigate('/');
   }, [user])
 
-  // useEffect(() => {
-  //   if (form.association[4].value && cities.length) {
-  //     let auxForm = copyObject(form.association);
-  //     let index = auxForm.findIndex(
-  //       (input) => input.key === 'city_id'
-  //     );
-  //     if (index > -1) {
-  //       auxForm[index].options = cities.filter(
-  //         (city) => city.province_id === form.association[4].value
-  //       ).map(
-  //         (city) => ({
-  //           name: city.name,
-  //           key: city.id,
-  //           value: city.id,
-  //         })
-  //       )
-  //       setForm({...form, association: auxForm});
-  //     }
-  //   }
-  // }, [form.association[4].value])
-
   const getProvinces = async () => {
     await axios.get(ENDPOINTS.LOCATION.GET_PROVINCES)
     .then(({data}) => {

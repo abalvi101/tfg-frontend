@@ -4,7 +4,9 @@ export const ENDPOINTS = {
   AUTH: {
     LOGIN: 'auth/login',
     REGISTER: 'auth/register',
-    GET_USER: 'auth/getUser'
+    GET_USER: 'auth/getUser',
+    GET_USER_INFO: 'auth/getUserInfo',
+    UPDATE: '/auth/update',
   },
   LOCATION: {
     GET_PROVINCES: 'location/getProvinces',
@@ -16,6 +18,7 @@ export const ENDPOINTS = {
     GET_SPECIES: 'animals/getSpecies',
     GET_BREEDS: 'animals/getBreeds',
     GET_SIZES: 'animals/getSizes',
+    CREATE: 'animals/create',
   }
 };
 

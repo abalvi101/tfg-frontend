@@ -379,13 +379,8 @@ export const Adoptions = ({ className, }) => {
           animals.map(
             (animal) => (
               <AnimalCard
+                animal={animal}
                 key={animal.id}
-                image={animal.image}
-                name={animal.name}
-                gender={animal.gender}
-                age={animal.age}
-                size={animal.size}
-                breed={animal.breed}
                 onClick={() => navigate(`/animal/${animal.id}`)}
               />
             )
