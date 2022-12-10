@@ -19,6 +19,8 @@ export const ENDPOINTS = {
     GET_BREEDS: 'animals/getBreeds',
     GET_SIZES: 'animals/getSizes',
     CREATE: 'animals/create',
+    UPDATE: 'animals/update',
+    UPDATE_IMAGE: 'animals/updateImage',
   }
 };
 

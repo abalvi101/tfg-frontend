@@ -12,7 +12,7 @@ import UserProfile from "./user-profile/UserProfile.styled";
 export default ({ className, }) => {
   const [user, userUpdate] = useAuth();
   const [userInfo, setUserInfo] = useState({});
-  const [imageBase64, setImageBase64] = useState(null);
+  // const [imageBase64, setImageBase64] = useState(null);
   const [image, setImage] = useState(null);
   // URL.createObjectURL(image);
 
@@ -20,26 +20,26 @@ export default ({ className, }) => {
     getUserInfo();
   }, [])
 
-  useEffect(() => {
-    if (image) {
-      getBase64StringFromImage(
-        image,
-        (value) => setImageBase64(value)
-      )
-    } else {
-      setImageBase64(null);
-    }
-  }, [image])
+  // useEffect(() => {
+  //   if (image) {
+  //     getBase64StringFromImage(
+  //       image,
+  //       (value) => setImageBase64(value)
+  //     )
+  //   } else {
+  //     setImageBase64(null);
+  //   }
+  // }, [image])
 
-  useEffect(() => {
-    axios.post('/auth/submitImage', {image: imageBase64})
-    .then(({data}) => {
-      console.log('response submit image', data);
-    })
-    .catch((error) => {
-      console.log('error submit image', error);
-    })
-  }, [imageBase64])
+  // useEffect(() => {
+  //   axios.post('/auth/submitImage', {image: imageBase64})
+  //   .then(({data}) => {
+  //     console.log('response submit image', data);
+  //   })
+  //   .catch((error) => {
+  //     console.log('error submit image', error);
+  //   })
+  // }, [imageBase64])
 
   const getUserInfo = () => {
     if (!user.token) return userUpdate.logout()
@@ -56,18 +56,40 @@ export default ({ className, }) => {
     })
   }
 
-  const onLoadImage = (image) => {
-    setImage(image);
+  const onDeleteImage = () => {
+    axios.post('/auth/submitImage', {image: ''})
+    .then(() => {
+      setImage(null);
+      getUserInfo();
+    })
+    .catch((error) => {
+      console.log('error submit image', error);
+    })
   }
 
-  const onDeleteImage = () => {
-    setImage(null);
+  const onLoadImage = (uploadedImage) => {    
+    if (uploadedImage) {
+      getBase64StringFromImage(
+        uploadedImage,
+        (value) => {
+          axios.post('/auth/submitImage', {image: value})
+          .then(() => {
+            setImage(uploadedImage);
+          })
+          .catch((error) => {
+            console.log('error submit image', error);
+          })
+        }
+      )
+    } else {
+      onDeleteImage();
+    } 
   }
 
   const getImageSrc = () => {
-    if (userInfo.profile_image)
-      return userInfo.profile_image;
-    return image ? URL.createObjectURL(image) : null;
+    if (image)
+      return URL.createObjectURL(image);
+    return userInfo.profile_image;
   }
 
   return (
@@ -77,6 +99,7 @@ export default ({ className, }) => {
           src={getImageSrc()}
           onEdit={onLoadImage}
           onDelete={onDeleteImage}
+          editable
         />
         <h1>{userInfo.name} {userInfo.surname}</h1>
       </header>

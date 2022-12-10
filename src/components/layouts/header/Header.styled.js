@@ -22,8 +22,12 @@ const Header = styled(UnstyledHeader)`
   .menu {
     flex-grow: 1;
     display: flex;
-    gap: 6rem;
+    gap: 4rem;
     height: 100%;
+  }
+  .brand {
+    display: flex;
+    gap: 0.8rem;
   }
   .menu_icon {
     width: 1.6rem;
@@ -34,6 +38,7 @@ const Header = styled(UnstyledHeader)`
     color: ${props => props.theme.primary};
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
   .links_wrapper {
     display: flex;
@@ -204,6 +209,15 @@ const Header = styled(UnstyledHeader)`
       padding-right: 2rem
       /* background-color: ${props => props.theme.backgroundLight}; */
       /* background-color: rgba(255, 191, 105, 0.5); */
+    }
+  }
+
+  @media only screen and (max-width: 425px) {
+    .brand * {
+      font-size: 1.2rem;
+    }
+    .brand img {
+      width: 4rem;
     }
   }
 `

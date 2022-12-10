@@ -7,7 +7,10 @@ export const Footer = ({ className, }) => {
           <img className="icon instagram" src="/icons/instagram.svg"/>
           <img className="icon twitter" src="/icons/twitter.svg"/>
         </section>
-        <section className="brand">Logo y nombre</section>
+        <section className="brand">
+          <img src="/LogoWhite.svg" alt="Logo de Adogtanos"/>
+          <h2>Adogtanos</h2>
+        </section>
         <section className="links">
           <ul>
             <li>Contacto</li>

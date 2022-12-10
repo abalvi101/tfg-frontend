@@ -52,7 +52,10 @@ export const Header = ({ className, }) => {
     <header className={className}>
       <div className="content">
         <div className="menu">
-          <h1>Título</h1>
+          <div className='brand'>
+            <img src="/LogoWhite.svg" />
+            <h1 onClick={() => navigate('/')}>Adogtanos</h1>
+          </div>
           <img
             className="menu_icon"
             src="/icons/menu.svg"

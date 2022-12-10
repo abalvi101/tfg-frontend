@@ -12,12 +12,21 @@ const Footer = styled(UnstyledFooter)`
     justify-content: space-between;
     align-items: flex-end;
   }
+  .brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .brand img {
+    width: 10rem;
+  }
   .rrss {
     display: flex;
     gap: 1rem;
   }
   .rrss > .icon {
     width: 1.5rem;
+    cursor: pointer;
   }
   .links > ul {
     text-align: right;

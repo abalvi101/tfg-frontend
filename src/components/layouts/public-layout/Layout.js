@@ -3,7 +3,7 @@ import { useAppState } from "../../../hooks"
 import Footer from "../footer/Footer.styled";
 import Header from "../header"
 
-export const Layout = ({ className, ...props }) => {
+export const Layout = ({ className, children, ...props }) => {
   
   const [appState, appStateUpdate] = useAppState();
 
@@ -18,6 +18,7 @@ export const Layout = ({ className, ...props }) => {
             : null
           }
           <Outlet />
+          {children}
         </div>
       </section>
       {/* <img src="background/Background.svg" /> */}

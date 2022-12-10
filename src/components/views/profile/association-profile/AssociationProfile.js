@@ -27,7 +27,6 @@ export default ({ className, association, refresh }) => {
 
   return (
     <div className={className}>
-      pinga
       <section className="about_us">
         <h4>Sobre nosotros/as</h4>
         <textarea

@@ -18,6 +18,7 @@ import ProtectedRoute from "./components/common/protected-route/ProtectedRoute";
 import { useAuth } from "./hooks";
 import Profile from "./components/views/profile/Profile.styled";
 import Animal from "./components/views/animal/Animal.styled";
+import Home from "./components/views/home/Home.styled";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h3>Home</h3>,
+        element: <Home />,
       },
       {
         path: "/adopciones",

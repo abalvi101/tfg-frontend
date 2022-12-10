@@ -101,12 +101,12 @@ const defaultForm = [
       {
         value: 1,
         name: 'Macho',
-        key: 1,
+        key: 'male',
       },
       {
         value: 0,
         name: 'Hembra',
-        key: 0,
+        key: 'female',
       }
     ],
   },
@@ -120,12 +120,12 @@ const defaultForm = [
       {
         value: 1,
         name: 'Sí',
-        key: 1,
+        key: true,
       },
       {
         value: 0,
         name: 'No',
-        key: 0,
+        key: false,
       }
     ],
   },
@@ -151,7 +151,7 @@ const defaultForm = [
   },
 ]
 
-export default ({ className, onSuccess }) => {
+export default ({ className, animal, onSuccess }) => {
   const [provinces, setProvinces] = useState([]);
   const [cities, setCities] = useState([]);
   const [species, setSpecies] = useState([]);
@@ -200,6 +200,20 @@ export default ({ className, onSuccess }) => {
       console.log('error', error);
     })
   }, [])
+
+  useEffect(() => {
+    if (animal)
+      Object.entries(animal).map(
+        ([key, value]) => {
+          let index = form.findIndex(
+            (field) => field.key === key
+          )
+          if (index > -1) {
+            form[index].value = value;
+          }
+        }
+      )
+  }, [animal])
 
   useEffect(() => {
     if (provinces.length) {
@@ -304,6 +318,7 @@ export default ({ className, onSuccess }) => {
   }
 
   const onSubmitHandler = async (event, form) => {
+    // return console.log('SUBMIT');
     event.preventDefault();
     if (!validateForm(form, setForm))
       return false;
@@ -314,10 +329,9 @@ export default ({ className, onSuccess }) => {
       }
     )
     
-    await axios.post(ENDPOINTS.ANIMAL.CREATE, data)
+    await axios.post(ENDPOINTS.ANIMAL.UPDATE, {id: animal.id, data: data})
     .then(({ data }) => {
       if (data.success) {
-        setForm(defaultForm);
         onSuccess();
       }
     })
@@ -333,7 +347,7 @@ export default ({ className, onSuccess }) => {
       noValidate
     >
       <legend>
-        <h4>Añadir animal en adopción</h4>
+        <h4>Modificar datos del animal</h4>
       </legend>
 
       <section className="form">
@@ -342,21 +356,19 @@ export default ({ className, onSuccess }) => {
             (input, index) => (
               <Input
                 {...input}
-                className={input.key === 'description' ? 'description-input' : null}
                 onChange={(value) => onChangeInputHandler(value, index)}
               />
             )
           )
         }
+        <Button
+          primary
+          type="submit"
+          className="button"
+        >
+          Confirmar
+        </Button>
       </section>
-
-      <Button
-        primary
-        type="submit"
-        className="button"
-      >
-        Añadir
-      </Button>
     </form>
   )
 }
