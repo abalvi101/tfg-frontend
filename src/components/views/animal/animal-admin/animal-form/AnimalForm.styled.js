@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Input from '../../../../common/input';
 import UnstyledAnimalForm from './AnimalForm';
 
 const AnimalForm = styled(UnstyledAnimalForm)`
@@ -12,6 +13,10 @@ const AnimalForm = styled(UnstyledAnimalForm)`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-gap: 2rem 3%;
+  }
+  .form ${Input}:last-child {
+    grid-column-start: 1;
+    grid-column-end: -1;
   }
   .button {
     align-self: flex-end;

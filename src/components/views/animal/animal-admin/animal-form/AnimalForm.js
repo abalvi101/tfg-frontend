@@ -361,6 +361,7 @@ export default ({ className, animal, onSuccess }) => {
             )
           )
         }
+      </section>
         <Button
           primary
           type="submit"
@@ -368,7 +369,6 @@ export default ({ className, animal, onSuccess }) => {
         >
           Confirmar
         </Button>
-      </section>
     </form>
   )
 }
