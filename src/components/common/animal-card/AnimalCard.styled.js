@@ -36,6 +36,15 @@ const AnimalCard = styled(UnstyledAnimalCard)`
     height: 1.6rem;
     ${props => props.gender ? 'transform: rotate(45deg);' : null}
   }
+  .body {
+    position: relative;
+  }
+  .body img.like {
+    position: absolute;
+    width: 1.6rem;
+    bottom: 0;
+    right: 0;
+  }
 `
 
 export default AnimalCard;

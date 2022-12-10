@@ -133,6 +133,30 @@ const Header = styled(UnstyledHeader)`
     height: 0;
     transition: 2s;
   }
+  
+  @media only screen and (max-width: 915px) {
+    * {
+      font-size: 0.9rem;
+    }
+    .brand * {
+      font-size: 1.2rem;
+    }
+    .menu {
+      gap: 2rem;
+    }
+  }
+  
+  @media only screen and (max-width: 840px) {
+    * {
+      font-size: 0.8rem;
+    }
+    .brand * {
+      font-size: 1.2rem;
+    }
+    .menu {
+      gap: 2rem;
+    }
+  }
 
   @media only screen and (max-width: 768px) {
     .links_wrapper {
@@ -145,6 +169,7 @@ const Header = styled(UnstyledHeader)`
       width: 220px;
       /* padding-right: 1rem; */
       background-color: ${props => props.theme.background};
+      box-shadow: 0 6px 3px rgba(0, 0, 0, 0.1);
     }
     .links {
       background-color: ${props => props.theme.background};

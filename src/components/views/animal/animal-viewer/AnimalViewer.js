@@ -6,6 +6,14 @@ import ProfileImage from "../../../common/profile-image/ProfileImage.styled";
 import Animal from "../Animal";
 
 export default ({ className, animal }) => {
+  let location = `${animal.name} se encuentra en `;
+
+  const getLocation = () => {
+    if (animal?.fostering) {
+      return animal.fostering
+    }
+  }
+
   return (
     <div className={className}>
       <header className="header">
@@ -26,6 +34,13 @@ export default ({ className, animal }) => {
           <div>
             <h4>Localización</h4>
             <p>{`${animal.name} se encuentra en ${animal.city?.name}, ${animal.province?.name}.`}</p>
+            {
+              animal.fostering
+              ? <p className="fostering">
+                  Actualmente está en una casa de acogida, su localización podría haber variado.
+                </p>
+              : null
+            }
           </div>
         </section>
         <section>

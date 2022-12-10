@@ -32,6 +32,9 @@ const Footer = styled(UnstyledFooter)`
     text-align: right;
     list-style-position: inside;
   }
+  .links > ul li {
+    cursor: pointer;
+  }
 
 @media only screen and (max-width: 425px) {
   .content {

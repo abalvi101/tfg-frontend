@@ -1,4 +1,5 @@
-export const AnimalCard = ({ className, animal, onClick }) => {
+export const AnimalCard = ({ className, animal, onClick, onLike }) => {
+  console.log('NAIMAL', animal)
   return (
     <section className={className} onClick={onClick}>
       <img
@@ -15,6 +16,16 @@ export const AnimalCard = ({ className, animal, onClick }) => {
           <li>Tamaño: {animal.size.name}</li>
           <li>Raza: {animal.breed.name}</li>
         </ul>
+        {
+          animal.favourite !== null
+          ? <img
+              className="like"
+              src={`/icons/like${animal.favourite ? 'd' : ''}.svg`}
+              alt="Like icon"
+              onClick={onLike}
+            />
+          : null
+        }
       </div>
       {
         animal.fostering &&

@@ -357,6 +357,20 @@ export const Adoptions = ({ className, }) => {
     setFilters(auxFilters);
   }
 
+  const onLike = (event, id) => {
+    event.stopPropagation();
+    axios
+      .post(ENDPOINTS.AUTH.FAVOURITE, {animal_id: id})
+      .then(({data}) => {
+        if (data.success) {
+          getAnimals();
+        } else {
+          console.log('Error en al añadir/quitar favorito');
+        }
+      })
+      .catch((error) => console.log('Error en al añadir/quitar favorito', error))
+  } 
+
   return (
     <div className={className}>
       <section className="filters">
@@ -382,6 +396,7 @@ export const Adoptions = ({ className, }) => {
                 animal={animal}
                 key={animal.id}
                 onClick={() => navigate(`/animal/${animal.id}`)}
+                onLike={(event) => onLike(event, animal.id)}
               />
             )
           )

@@ -7,6 +7,7 @@ export const ENDPOINTS = {
     GET_USER: 'auth/getUser',
     GET_USER_INFO: 'auth/getUserInfo',
     UPDATE: '/auth/update',
+    FAVOURITE: '/auth/favourite',
   },
   LOCATION: {
     GET_PROVINCES: 'location/getProvinces',
@@ -21,6 +22,8 @@ export const ENDPOINTS = {
     CREATE: 'animals/create',
     UPDATE: 'animals/update',
     UPDATE_IMAGE: 'animals/updateImage',
+    STORE_FOSTERING: 'animals/storeFostering',
+    DELETE_FOSTERING: 'animals/deleteFostering',
   }
 };
 

@@ -30,6 +30,9 @@ const AnimalViewer = styled(UnstyledAnimalViewer)`
     flex-direction: column;
     gap: 1rem;
   }
+  .info .fostering {
+    color: ${props => props.theme.secondaryFont};
+  }
   .info > section > div {
     width: 100%;
     display: flex;

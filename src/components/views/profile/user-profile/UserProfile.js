@@ -1,11 +1,14 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { ENDPOINTS } from "../../../../consts/api"
 import { copyObject, validateForm } from "../../../../utils"
+import AnimalCard from "../../../common/animal-card"
 import Button from "../../../common/button"
 import Input from "../../../common/input"
 
 export default ({ className, user, refresh }) => {
+  const navigate = useNavigate();
   const [form, setForm] = useState([
     {
       label: 'Nombre',
@@ -173,6 +176,20 @@ export default ({ className, user, refresh }) => {
     })
   }
 
+  const onLike = (event, id) => {
+    event.stopPropagation();
+    axios
+      .post(ENDPOINTS.AUTH.FAVOURITE, {animal_id: id})
+      .then(({data}) => {
+        if (data.success) {
+          refresh();
+        } else {
+          console.log('Error en al añadir/quitar favorito');
+        }
+      })
+      .catch((error) => console.log('Error en al añadir/quitar favorito', error))
+  } 
+
   return (
     <div className={className}>
       <form
@@ -206,6 +223,23 @@ export default ({ className, user, refresh }) => {
         </section>
 
       </form>
+      <section className="favourite_animals">
+        <h4>Animales favoritos</h4>
+        <div className="list_animal">
+          {
+            user.favourites?.map(
+              (animal) => (
+                <AnimalCard
+                  animal={animal}
+                  key={animal.id}
+                  onClick={() => navigate(`/animal/${animal.id}`)}
+                  onLike={(event) => onLike(event, animal.id)}
+                />
+              )
+            )
+          }
+        </div>
+      </section>
     </div>
   )
 }

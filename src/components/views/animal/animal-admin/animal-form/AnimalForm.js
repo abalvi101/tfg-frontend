@@ -151,68 +151,24 @@ const defaultForm = [
   },
 ]
 
-export default ({ className, animal, onSuccess }) => {
-  const [provinces, setProvinces] = useState([]);
-  const [cities, setCities] = useState([]);
-  const [species, setSpecies] = useState([]);
-  const [breeds, setBreeds] = useState([]);
-  const [sizes, setSizes] = useState([]);
+export default ({ className, animal, onSuccess, provinces, cities, species, breeds, sizes }) => {
   const [form, setForm] = useState(defaultForm);
 
   useEffect(() => {
-    axios.get(ENDPOINTS.LOCATION.GET_PROVINCES)
-    .then(({data}) => {
-      setProvinces(data.data);
-    })
-    .catch((error) => {
-      console.log('error', error);
-    })
-
-    axios.get(ENDPOINTS.LOCATION.GET_CITIES)
-    .then(({data}) => {
-      setCities(data.data);
-    })
-    .catch((error) => {
-      console.log('error', error);
-    })
-
-    axios.get(ENDPOINTS.ANIMAL.GET_SPECIES)
-    .then(({data}) => {
-      setSpecies(data.data);
-    })
-    .catch((error) => {
-      console.log('error', error);
-    })
-
-    axios.get(ENDPOINTS.ANIMAL.GET_BREEDS)
-    .then(({data}) => {
-      setBreeds(data.data);
-    })
-    .catch((error) => {
-      console.log('error', error);
-    })
-
-    axios.get(ENDPOINTS.ANIMAL.GET_SIZES)
-    .then(({data}) => {
-      setSizes(data.data);
-    })
-    .catch((error) => {
-      console.log('error', error);
-    })
-  }, [])
-
-  useEffect(() => {
-    if (animal)
+    if (animal) {
+      let auxForm = copyObject(form);
       Object.entries(animal).map(
         ([key, value]) => {
           let index = form.findIndex(
             (field) => field.key === key
           )
           if (index > -1) {
-            form[index].value = value;
+            auxForm[index].value = value;
           }
         }
       )
+      setForm(auxForm);
+    }
   }, [animal])
 
   useEffect(() => {

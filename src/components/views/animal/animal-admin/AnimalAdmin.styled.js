@@ -5,7 +5,7 @@ const AnimalAdmin = styled(UnstyledAnimalAdmin)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 2.6rem;
 
   .header {
     display: flex;
