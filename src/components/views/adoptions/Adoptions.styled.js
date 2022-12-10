@@ -7,14 +7,23 @@ const Adoptions = styled(UnstyledAdoptions)`
     margin: auto;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    /* grid-template-rows: 200px; */
     grid-gap: 2rem 3%;
   }
   .filters {
-    display: flex;
+    /* display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
-    align-items: center;
+    align-items: center; */
+    
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 0.6rem 3%;
+  }
+  .filters .filter_button {
+    justify-self: flex-end;
+    align-self: flex-end;
+    grid-column-start: -2;
   }
 
   @media only screen and (max-width: 696px) {

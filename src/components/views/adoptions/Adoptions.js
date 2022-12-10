@@ -15,6 +15,8 @@ export const Adoptions = ({ className, }) => {
   const [species, setSpecies] = useState([]);
   const [breeds, setBreeds] = useState([]);
   const [sizes, setSizes] = useState([]);
+  const [provinces, setProvinces] = useState([]);
+  const [cities, setCities] = useState([]);
   const [filters, setFilters] = useState([
     {
       value: '',
@@ -37,225 +39,126 @@ export const Adoptions = ({ className, }) => {
       type: 'select',
       options: [],
     },
+    {
+      value: '',
+      label: 'Provincia',
+      key: 'province',
+      type: 'select',
+      options: [],
+    },
+    {
+      value: '',
+      label: 'Ciudad',
+      key: 'city',
+      type: 'select',
+      options: [],
+    },
+    {
+      value: '',
+      label: 'Género',
+      key: 'gender',
+      type: 'select',
+      options: [
+        {
+          value: null,
+          name: 'Todos',
+          key: 'Todos',
+        },
+        {
+          value: true,
+          name: 'Macho',
+          key: 'Macho',
+        },
+        {
+          value: false,
+          name: 'Hembra',
+          key: 'Hembra',
+        },
+      ],
+    },
   ])
 
   useEffect(() => {
     getAnimals();
     axios
+      .get(ENDPOINTS.LOCATION.GET_CITIES)
+      .then(({data}) => {
+        setCities(data.data);
+      })
+      .catch((error) => console.log('Error especies animales:', error))
+    axios
+      .get(ENDPOINTS.LOCATION.GET_PROVINCES)
+      .then(({data}) => {
+        setProvinces(data.data);
+      })
+      .catch((error) => console.log('Error especies animales:', error))
+    axios
       .get(ENDPOINTS.ANIMAL.GET_SPECIES)
       .then(({data}) => {
-        console.log('Especies', data.data);
         setSpecies(data.data);
       })
       .catch((error) => console.log('Error especies animales:', error))
     axios
       .get(ENDPOINTS.ANIMAL.GET_BREEDS)
       .then(({data}) => {
-        console.log('Razas', data.data);
         setBreeds(data.data);
       })
       .catch((error) => console.log('Error razas animales:', error))
     axios
       .get(ENDPOINTS.ANIMAL.GET_SIZES)
       .then(({data}) => {
-        console.log('Tamaños', data.data);
         setSizes(data.data);
       })
       .catch((error) => console.log('Error tamaños animales:', error))
-
-
-    // setAnimals([
-    //   {
-    //     id: 1,
-    //     image: "test/perro1.jpg",
-    //     name: 'Miky',
-    //     gender: true,
-    //     age: 2,
-    //     size: 'Mediano',
-    //     breed: 'Galgo',
-    //   },
-    //   {
-    //     id: 2,
-    //     image: "test/perro2.jpg",
-    //     name: 'Sara',
-    //     gender: false,
-    //     age: 5,
-    //     size: 'Mediano',
-    //     breed: 'Golden retriever',
-    //   },
-    //   {
-    //     id: 3,
-    //     image: "test/perro3.jpg",
-    //     name: 'Curro',
-    //     gender: true,
-    //     age: 11,
-    //     size: 'Pequeño',
-    //     breed: 'Mestizo',
-    //   },
-    //   {
-    //     id: 4,
-    //     image: "test/perro1.jpg",
-    //     name: 'Miky',
-    //     gender: true,
-    //     age: 2,
-    //     size: 'Mediano',
-    //     breed: 'Galgo',
-    //   },
-    //   {
-    //     id: 5,
-    //     image: "test/perro2.jpg",
-    //     name: 'Sara',
-    //     gender: false,
-    //     age: 5,
-    //     size: 'Mediano',
-    //     breed: 'Golden retriever',
-    //   },
-    //   {
-    //     id: 6,
-    //     image: "test/perro3.jpg",
-    //     name: 'Curro',
-    //     gender: true,
-    //     age: 11,
-    //     size: 'Pequeño',
-    //     breed: 'Mestizo',
-    //   },
-    //   {
-    //     id: 7,
-    //     image: "test/perro1.jpg",
-    //     name: 'Miky',
-    //     gender: true,
-    //     age: 2,
-    //     size: 'Mediano',
-    //     breed: 'Galgo',
-    //   },
-    //   {
-    //     id: 8,
-    //     image: "test/perro2.jpg",
-    //     name: 'Sara',
-    //     gender: false,
-    //     age: 5,
-    //     size: 'Mediano',
-    //     breed: 'Golden retriever',
-    //   },
-    //   {
-    //     id: 9,
-    //     image: "test/perro3.jpg",
-    //     name: 'Curro',
-    //     gender: true,
-    //     age: 11,
-    //     size: 'Pequeño',
-    //     breed: 'Mestizo',
-    //   },
-    //   {
-    //     id: 10,
-    //     image: "test/perro1.jpg",
-    //     name: 'Miky',
-    //     gender: true,
-    //     age: 2,
-    //     size: 'Mediano',
-    //     breed: 'Galgo',
-    //   },
-    //   {
-    //     id: 11,
-    //     image: "test/perro2.jpg",
-    //     name: 'Sara',
-    //     gender: false,
-    //     age: 5,
-    //     size: 'Mediano',
-    //     breed: 'Golden retriever',
-    //   },
-    //   {
-    //     id: 12,
-    //     image: "test/perro3.jpg",
-    //     name: 'Curro',
-    //     gender: true,
-    //     age: 11,
-    //     size: 'Pequeño',
-    //     breed: 'Mestizo',
-    //   },
-    //   {
-    //     id: 13,
-    //     image: "test/perro1.jpg",
-    //     name: 'Miky',
-    //     gender: true,
-    //     age: 2,
-    //     size: 'Mediano',
-    //     breed: 'Galgo',
-    //   },
-    //   {
-    //     id: 14,
-    //     image: "test/perro2.jpg",
-    //     name: 'Sara',
-    //     gender: false,
-    //     age: 5,
-    //     size: 'Mediano',
-    //     breed: 'Golden retriever',
-    //   },
-    //   {
-    //     id: 15,
-    //     image: "test/perro3.jpg",
-    //     name: 'Curro',
-    //     gender: true,
-    //     age: 11,
-    //     size: 'Pequeño',
-    //     breed: 'Mestizo',
-    //   },
-    //   {
-    //     id: 16,
-    //     image: "test/perro1.jpg",
-    //     name: 'Miky',
-    //     gender: true,
-    //     age: 2,
-    //     size: 'Mediano',
-    //     breed: 'Galgo',
-    //   },
-    //   {
-    //     id: 17,
-    //     image: "test/perro2.jpg",
-    //     name: 'Sara',
-    //     gender: false,
-    //     age: 5,
-    //     size: 'Mediano',
-    //     breed: 'Golden retriever',
-    //   },
-    //   {
-    //     id: 18,
-    //     image: "test/perro3.jpg",
-    //     name: 'Curro',
-    //     gender: true,
-    //     age: 11,
-    //     size: 'Pequeño',
-    //     breed: 'Mestizo',
-    //   },
-    //   {
-    //     id: 19,
-    //     image: "test/perro1.jpg",
-    //     name: 'Miky',
-    //     gender: true,
-    //     age: 2,
-    //     size: 'Mediano',
-    //     breed: 'Galgo',
-    //   },
-    //   {
-    //     id: 20,
-    //     image: "test/perro2.jpg",
-    //     name: 'Sara',
-    //     gender: false,
-    //     age: 5,
-    //     size: 'Mediano',
-    //     breed: 'Golden retriever',
-    //   },
-    //   {
-    //     id: 21,
-    //     image: "test/perro3.jpg",
-    //     name: 'Curro',
-    //     gender: true,
-    //     age: 11,
-    //     size: 'Pequeño',
-    //     breed: 'Mestizo',
-    //   },
-    // ])
   }, [])
+
+  useEffect(() => {
+    let index = filters.findIndex(
+      (field) => field.key === 'province'
+    );
+    if (index !== -1) {
+      let auxFilters = copyObject(filters);
+      auxFilters[index].options = provinces.map(
+        (province) => ({
+          key: province.id,
+          value: province.id,
+          name: province.name,
+        })
+      )
+      auxFilters[index].options.unshift(
+        {
+          key: null,
+          value: null,
+          name: 'Todas',
+        }
+      )
+      setFilters(auxFilters);
+    }
+  }, [provinces])
+
+  useEffect(() => {
+    let index = filters.findIndex(
+      (field) => field.key === 'city'
+    );
+    if (index !== -1) {
+      let auxFilters = copyObject(filters);
+      auxFilters[index].options = cities.map(
+        (city) => ({
+          key: city.id,
+          value: city.id,
+          name: city.name,
+        })
+      )
+      auxFilters[index].options.unshift(
+        {
+          key: null,
+          value: null,
+          name: 'Todas',
+        }
+      )
+      setFilters(auxFilters);
+    }
+  }, [cities])
 
   useEffect(() => {
     let index = filters.findIndex(
@@ -277,7 +180,6 @@ export const Adoptions = ({ className, }) => {
           name: 'Todas',
         }
       )
-      console.log('ESPECIE', auxFilters);
       setFilters(auxFilters);
     }
   }, [species])
@@ -302,7 +204,6 @@ export const Adoptions = ({ className, }) => {
           name: 'Todas',
         }
       )
-      console.log('BREEDS', auxFilters);
       setFilters(auxFilters);
     }
   }, [breeds])
@@ -327,7 +228,6 @@ export const Adoptions = ({ className, }) => {
           name: 'Todas',
         }
       )
-      console.log('SIZES', auxFilters);
       setFilters(auxFilters);
     }
   }, [sizes])
@@ -384,7 +284,10 @@ export const Adoptions = ({ className, }) => {
             )
           )
         }
-        <Button onClick={getAnimals}>
+        <Button
+          className="filter_button"
+          onClick={getAnimals}
+        >
           Filtrar
         </Button>
       </section>
