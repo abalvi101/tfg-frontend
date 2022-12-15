@@ -1,5 +1,4 @@
 export const AnimalCard = ({ className, animal, onClick, onLike }) => {
-  console.log('NAIMAL', animal)
   return (
     <section className={className} onClick={onClick}>
       <img

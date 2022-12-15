@@ -274,7 +274,6 @@ export default ({ className, animal, onSuccess, provinces, cities, species, bree
   }
 
   const onSubmitHandler = async (event, form) => {
-    // return console.log('SUBMIT');
     event.preventDefault();
     if (!validateForm(form, setForm))
       return false;

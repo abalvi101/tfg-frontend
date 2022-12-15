@@ -1,8 +1,7 @@
 import axios from "axios"
-import { useContext, useEffect } from "react"
+import { useEffect } from "react"
 import { useState } from "react"
 import { ENDPOINTS } from "../../../consts/api"
-import { AuthContext, login } from "../../../contexts/auth"
 import { copyObject, validateForm } from "../../../utils"
 import Button from "../../common/button"
 import Input from "../../common/input"
@@ -77,7 +76,6 @@ export const Login = ({ className, }) => {
   }
 
   const onChangeInputHandler = (value, index) => {
-    console.log('PACOOOO')
     let auxForm = copyObject(form);
     auxForm[index].value = value;
     auxForm[index].error = '';
@@ -91,7 +89,7 @@ export const Login = ({ className, }) => {
       noValidate
     >
       <legend>
-        <h1>Incio de sesión</h1>
+        <h1>Inicio de sesión</h1>
       </legend>
 
       {

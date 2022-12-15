@@ -8,7 +8,7 @@ const Home = styled(UnstyledHome)`
 
   .about_us, .adopt {
     display: flex;
-    gap: 2rem;
+    gap: 4rem;
     align-items: center;
   }
   .about_us > *, .adopt > * {
@@ -45,6 +45,12 @@ const Home = styled(UnstyledHome)`
     background-position: center;
     aspect-ratio: 1600/1024;
     border-radius: 0.5rem;
+  }
+  .adopt .text {
+    align-items: flex-end;
+  }
+  .adopt p {
+    text-align: right;
   }
   .adopt .text *:nth-child(3) {
     margin-top: 2rem;

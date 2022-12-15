@@ -70,7 +70,6 @@ function App() {
   }, [])
 
   useEffect(() => {
-    // console.log('cambia user', user);
     axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
     axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
   }, [user])

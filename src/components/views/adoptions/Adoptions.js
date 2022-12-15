@@ -242,7 +242,6 @@ export const Adoptions = ({ className, }) => {
     axios
       .post(ENDPOINTS.ANIMAL.GET_FILTERED_ANIMALS, parameters)
       .then(({data}) => {
-        console.log('response animals', data);
         setAnimals(data.data);
       })
       .catch((error) => {

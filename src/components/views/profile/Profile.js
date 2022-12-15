@@ -12,34 +12,11 @@ import UserProfile from "./user-profile/UserProfile.styled";
 export default ({ className, }) => {
   const [user, userUpdate] = useAuth();
   const [userInfo, setUserInfo] = useState({});
-  // const [imageBase64, setImageBase64] = useState(null);
   const [image, setImage] = useState(null);
-  // URL.createObjectURL(image);
 
   useEffect(() => {
     getUserInfo();
   }, [])
-
-  // useEffect(() => {
-  //   if (image) {
-  //     getBase64StringFromImage(
-  //       image,
-  //       (value) => setImageBase64(value)
-  //     )
-  //   } else {
-  //     setImageBase64(null);
-  //   }
-  // }, [image])
-
-  // useEffect(() => {
-  //   axios.post('/auth/submitImage', {image: imageBase64})
-  //   .then(({data}) => {
-  //     console.log('response submit image', data);
-  //   })
-  //   .catch((error) => {
-  //     console.log('error submit image', error);
-  //   })
-  // }, [imageBase64])
 
   const getUserInfo = () => {
     if (!user.token) return userUpdate.logout()
@@ -104,7 +81,6 @@ export default ({ className, }) => {
         <h1>{userInfo.name} {userInfo.surname}</h1>
       </header>
       <section className="info">
-        {/* {console.log(user.role)} */}
         {
           user.role === 'user'
             ? <UserProfile user={userInfo} refresh={getUserInfo} />
