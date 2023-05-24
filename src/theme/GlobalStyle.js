@@ -20,7 +20,8 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     color: ${props => props.theme.primaryFont};
-    font-family: Lusitana;
+    /* font-family: Lusitana; */
+    font-family: Sora;
     box-sizing: border-box;
     margin: 0;
     padding: 0;

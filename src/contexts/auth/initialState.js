@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE } from "../../consts/api";
+import { LOCAL_STORAGE } from "../../env/env";
 
 const initialState = {
   token: localStorage.getItem(LOCAL_STORAGE.API_TOKEN),

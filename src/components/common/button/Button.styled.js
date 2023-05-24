@@ -6,9 +6,9 @@ const Button = styled(UnstyledButton)`
   color: ${props => props.danger ? '#fff' : 'inital'};
   font-family: Sora;
   border: none;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+  border-radius: 4px;
+  padding: 8px 24px;
+  font-size: 12px;
   cursor: pointer;
 `
 

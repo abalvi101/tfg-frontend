@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect } from "react"
-import { LOCAL_STORAGE } from "../consts/api";
+import { LOCAL_STORAGE } from "../env/env";
 import { actions, AuthContext } from "../contexts/auth"
 
 const useAuth = () => {

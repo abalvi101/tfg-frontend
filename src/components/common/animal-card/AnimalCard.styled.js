@@ -2,22 +2,32 @@ import styled from "styled-components";
 import { AnimalCard as UnstyledAnimalCard } from "./AnimalCard";
 
 const AnimalCard = styled(UnstyledAnimalCard)`
-  box-shadow: 0px 1px 5px rgba(193, 193, 193, 0.6);
-  border-radius: 5px;
   background-color: ${props => props.theme.background};
-  /* width: 100%; */
-  padding: 6%;
   position: relative;
   cursor: pointer;
 
+  section.card-info {
+    padding: 16px;
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-radius: 0 0 6px 6px;
+    border: 1px solid ${props => props.theme.grey};
+    border-top: 0;
+  }
+  section.card-info * {
+    font-size: 14px;
+  }
+
   img.imagen {
+    border-radius: 6px 6px 0 0;
     object-fit: cover;
     width: 100%;
     aspect-ratio: 4/3;
-    border-radius: 5px;
   }
   img.acogida {
-    width: 25%;
+    width: 48px;
     position: absolute;
     top: -1rem;
     right: -1rem;
@@ -26,24 +36,26 @@ const AnimalCard = styled(UnstyledAnimalCard)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0.6rem 0;
+  }
+  header > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
   header h3 {
+    display: flex;
     font-weight: 500;
-    color: ${props => props.theme.primary}
+    font-size: 16px;
   }
-  header img {
-    height: 1.6rem;
-    ${props => props.gender ? 'transform: rotate(45deg);' : null}
+  header div img {
+    height: ${props => props.animal.gender == 1 ? 16 : 19}px;
+    /* ${props => props.gender ? 'transform: rotate(45deg);' : null} */
+  }
+  img.like {
+    height: 24px;
   }
   .body {
     position: relative;
-  }
-  .body img.like {
-    position: absolute;
-    width: 1.6rem;
-    bottom: 0;
-    right: 0;
   }
 `
 
