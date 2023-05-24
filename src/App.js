@@ -14,12 +14,12 @@ import darkTheme from "./theme/darkTheme";
 import Login from "./views/login/Login.styled";
 import Register from "./components/views/register";
 import Adoptions from "./views/adoptions/Adoptions.styled";
+import Home from "./views/home/Home.styled";
 import { ENDPOINTS } from "./consts/api";
 import ProtectedRoute from "./components/common/protected-route/ProtectedRoute";
 import { useAuth } from "./hooks";
 import Profile from "./components/views/profile/Profile.styled";
 import Animal from "./components/views/animal/Animal.styled";
-import Home from "./components/views/home/Home.styled";
 
 const router = createBrowserRouter([
   {
