@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { apiURL } from './consts/api';
+import { apiURL } from './env/env';
 import { AppStateProvider } from './contexts/app-state/';
 import { AuthProvider } from './contexts/auth';
 import reportWebVitals from './reportWebVitals';

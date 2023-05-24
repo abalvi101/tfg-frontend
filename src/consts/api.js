@@ -1,5 +1,3 @@
-export const apiURL = 'http://127.0.0.1/api/';
-
 export const ENDPOINTS = {
   AUTH: {
     LOGIN: 'auth/login',
@@ -25,11 +23,4 @@ export const ENDPOINTS = {
     STORE_FOSTERING: 'animals/storeFostering',
     DELETE_FOSTERING: 'animals/deleteFostering',
   }
-};
-
-export const LOCAL_STORAGE = {
-  API_TOKEN: 'API_TOKEN',
-  USER_NAME: 'USER_NAME',
-  USER_SURNAME: 'USER_SURNAME',
-  USER_ROLE: 'USER_ROLE',
 };

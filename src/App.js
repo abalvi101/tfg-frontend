@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import GlobalStyle from "./theme/GlobalStyle";
-import Layout from "./components/layouts/public-layout";
+// import Layout from "./components/layouts/public-layout";
+import Layout from "./views/layouts/public-layout";
 import Error from "./components/views/error";
 import {
   createBrowserRouter,
@@ -10,10 +11,10 @@ import {
 import { ThemeProvider } from "styled-components";
 import lightTheme from "./theme/lightTheme";
 import darkTheme from "./theme/darkTheme";
-import Login from "./components/views/login";
+import Login from "./views/login/Login.styled";
 import Register from "./components/views/register";
-import Adoptions from "./components/views/adoptions";
-import { apiURL, ENDPOINTS } from "./consts/api";
+import Adoptions from "./views/adoptions/Adoptions.styled";
+import { ENDPOINTS } from "./consts/api";
 import ProtectedRoute from "./components/common/protected-route/ProtectedRoute";
 import { useAuth } from "./hooks";
 import Profile from "./components/views/profile/Profile.styled";

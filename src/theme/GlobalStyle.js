@@ -35,11 +35,11 @@ const GlobalStyle = createGlobalStyle`
     list-style: none;
   }
   
-  @media only screen and (max-width: 1024px) {
+  /* @media only screen and (max-width: 1024px) {
     * {
       font-size: 0.95rem;
     }
-  }
+  } */
 `;
 
 export default GlobalStyle;
