@@ -11,16 +11,18 @@ export const Layout = ({ className, children, ...props }) => {
     <main className={className}>
       <Header />
       <section className="main-body">
-          {
-            appState.loading
-            ? 'Cargando'
-            : null
-          }
           <Outlet />
           {children}
       </section>
       {/* <img src="background/Background.svg" /> */}
       <Footer/>
+      {
+        appState.loading
+        ? <div id="loader">
+            <h1>Cargando...</h1>
+          </div>
+        : null
+      }
     </main>
   )
 }

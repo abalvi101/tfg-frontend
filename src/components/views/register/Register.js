@@ -155,9 +155,13 @@ export const Register = ({ className, }) => {
   useEffect(() => {
     const getData = async () => {
       appStateUpdate.startLoading();
-      await getProvinces();
-      await getCities();
-      appStateUpdate.finishLoading();
+      setTimeout(
+        async () => {
+          await getProvinces();
+          await getCities();
+          appStateUpdate.finishLoading();
+        }, 2300
+      )
     }
 
     getData();
