@@ -7,10 +7,12 @@ import { copyObject } from "../../utils";
 import AnimalCard from "../../components/common/animal-card"
 import Button from "../../components/common/button";
 import Input from "../../components/common/input";
+import { useAppState } from "../../hooks";
 
 export const Adoptions = ({ className, }) => {
 
   const navigate = useNavigate();
+  const [appState, appStateUpdate] = useAppState();
   const [animals, setAnimals] = useState([]);
   const [species, setSpecies] = useState([]);
   const [breeds, setBreeds] = useState([]);
@@ -79,37 +81,45 @@ export const Adoptions = ({ className, }) => {
   ])
 
   useEffect(() => {
-    getAnimals();
-    axios
-      .get(ENDPOINTS.LOCATION.GET_CITIES)
-      .then(({data}) => {
-        setCities(data.data);
-      })
-      .catch((error) => console.log('Error especies animales:', error))
-    axios
-      .get(ENDPOINTS.LOCATION.GET_PROVINCES)
-      .then(({data}) => {
-        setProvinces(data.data);
-      })
-      .catch((error) => console.log('Error especies animales:', error))
-    axios
-      .get(ENDPOINTS.ANIMAL.GET_SPECIES)
-      .then(({data}) => {
-        setSpecies(data.data);
-      })
-      .catch((error) => console.log('Error especies animales:', error))
-    axios
-      .get(ENDPOINTS.ANIMAL.GET_BREEDS)
-      .then(({data}) => {
-        setBreeds(data.data);
-      })
-      .catch((error) => console.log('Error razas animales:', error))
-    axios
-      .get(ENDPOINTS.ANIMAL.GET_SIZES)
-      .then(({data}) => {
-        setSizes(data.data);
-      })
-      .catch((error) => console.log('Error tamaños animales:', error))
+    const getData = async () => {
+      appStateUpdate.startLoading();
+      await getAnimals();
+      await axios
+        .get(ENDPOINTS.LOCATION.GET_CITIES)
+        .then(({data}) => {
+          setCities(data.data);
+        })
+        .catch((error) => console.log('Error especies animales:', error));
+      await axios
+        .get(ENDPOINTS.LOCATION.GET_PROVINCES)
+        .then(({data}) => {
+          setProvinces(data.data);
+        })
+        .catch((error) => console.log('Error especies animales:', error));
+      await axios
+        .get(ENDPOINTS.ANIMAL.GET_SPECIES)
+        .then(({data}) => {
+          setSpecies(data.data);
+        })
+        .catch((error) => console.log('Error especies animales:', error));
+      await axios
+        .get(ENDPOINTS.ANIMAL.GET_BREEDS)
+        .then(({data}) => {
+          setBreeds(data.data);
+        })
+        .catch((error) => console.log('Error razas animales:', error));
+      await axios
+        .get(ENDPOINTS.ANIMAL.GET_SIZES)
+        .then(({data}) => {
+          setSizes(data.data);
+        })
+        .catch((error) => console.log('Error tamaños animales:', error));
+      appStateUpdate.finishLoading();
+    }
+
+    // setTimeout( () => {
+      getData();
+    // }, 2000000);
   }, [])
 
   useEffect(() => {
@@ -232,14 +242,14 @@ export const Adoptions = ({ className, }) => {
     }
   }, [sizes])
 
-  const getAnimals = () => {
+  const getAnimals = async () => {
     let parameters = {}
     filters.map(
       (field) => {
         parameters[field.key] = field.value
       }
     )
-    axios
+    await axios
       .post(ENDPOINTS.ANIMAL.GET_FILTERED_ANIMALS, parameters)
       .then(({data}) => {
         setAnimals(data.data);

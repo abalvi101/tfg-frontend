@@ -1,17 +1,18 @@
 // login-background.jpg
-import axios from "axios"
-import { useEffect } from "react"
-import { useState } from "react"
-import { ENDPOINTS } from "../../consts/api"
+import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
+import { ENDPOINTS } from "../../consts/api";
 import { copyObject, validateForm } from "../../utils";
-import Button from "../../components/common/button"
-import Input from "../../components/common/input"
-import { useAuth } from '../../hooks'
-import { Link, useNavigate } from "react-router-dom"
-import Switch from "../../components/common/switch"
+import Button from "../../components/common/button";
+import Input from "../../components/common/input";
+import { useAppState, useAuth } from '../../hooks';
+import { Link, useNavigate } from "react-router-dom";
+import Switch from "../../components/common/switch";
 
 export const Login = ({ className, }) => {
 
+  const [appState, appStateUpdate] = useAppState();
   const [user, userUpdate] = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState([
@@ -56,6 +57,7 @@ export const Login = ({ className, }) => {
 
   const onSubmitHandler = async (event, form) => {
     event.preventDefault();
+    appStateUpdate.startLoading();
     if (!validateForm(form, setForm))
       return false;
     let data = {}
@@ -74,6 +76,7 @@ export const Login = ({ className, }) => {
     .catch((error) => {
       console.log(error)
     })
+    .finally(() => appStateUpdate.finishLoading())
   }
 
   const onChangeInputHandler = (value, index) => {
@@ -117,7 +120,7 @@ export const Login = ({ className, }) => {
 
           <footer>
             <Link to="/registro">
-              ¿No tienes cuenta? Regístrate aquíii.
+              ¿No tienes cuenta? Regístrate aquí.
             </Link>
             <Button
               secondary
