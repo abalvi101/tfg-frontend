@@ -1,14 +1,14 @@
 import axios from "axios"
-import { useEffect } from "react"
+import { Fragment, useEffect } from "react"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { ENDPOINTS } from "../../../consts/api"
-import { useAppState, useAuth } from "../../../hooks"
-import { validateForm } from "../../../utils"
-import copyObject from "../../../utils/copyObject"
-import Button from "../../common/button"
-import Input from "../../common/input"
-import Switch from "../../common/switch"
+import { ENDPOINTS } from "../../consts/api"
+import { useAppState, useAuth } from "../../hooks"
+import { validateForm } from "../../utils"
+import copyObject from "../../utils/copyObject"
+import Button from "../../components/common/button"
+import Input from "../../components/common/input"
+import Switch from "../../components/common/switch";
 
 export const Register = ({ className, }) => {
 
@@ -234,8 +234,11 @@ export const Register = ({ className, }) => {
 
   const onSubmitHandler = async (event, form) => {
     event.preventDefault();
-    if (!validateForm(form, setPartialForm))
+    appStateUpdate.startLoading();
+    if (!validateForm(form, setPartialForm)) {
+      appStateUpdate.finishLoading();
       return false;
+    }
     let data = {role}
     form.map(
       (input) => {
@@ -253,6 +256,7 @@ export const Register = ({ className, }) => {
     .catch((error) => {
       console.log(error)
     })
+    .finally(() => appStateUpdate.finishLoading())
   }
 
   const onChangeInputHandler = (value, index) => {
@@ -263,44 +267,55 @@ export const Register = ({ className, }) => {
   }
 
   return (
-    <form
-      className={className}
-      onSubmit={(event) => onSubmitHandler(event, form[role])}
-      noValidate
-    >
-      <legend>
-        <h1>Registro</h1>
-      </legend>
-
-      {
-        form[role].map(
-          (input, index) => (
-            <Input
-              {...input}
-              onChange={(value) => onChangeInputHandler(value, index)}
-            />
-          )
-        )
-      }
-
-      <footer>
-        <label className="switch_label">
-          <span className={role === 'association' ? null : 'nonSelected'}>Asociación</span>
-          <Switch
-            value={role}
-            onChange={(value) => setRole(value)}
-            on='user'
-            off='association'
-          />
-          <span className={role === 'user' ? null : 'nonSelected'}>Usuario</span>
-        </label>
-        <Button
-          secondary
-          type="submit"
+  <Fragment>
+    <div className={className}>
+      <span id="register-background"/>
+      <section id='register-form'>
+        <form
+          onSubmit={(event) => onSubmitHandler(event, form[role])}
+          noValidate
         >
-          Confirmar
-        </Button>
-      </footer>
-    </form>
+          <legend>
+            <h1>Registro</h1>
+          </legend>
+
+          {
+            form[role].map(
+              (input, index) => (
+                <Input
+                  {...input}
+                  onChange={(value) => onChangeInputHandler(value, index)}
+                />
+              )
+            )
+          }
+
+          <label className="switch-label">
+            <span className={role === 'association' ? null : 'nonSelected'}>Asociación</span>
+            <Switch
+              value={role}
+              onChange={(value) => setRole(value)}
+              on='user'
+              off='association'
+            />
+            <span className={role === 'user' ? null : 'nonSelected'}>Usuario</span>
+          </label>
+
+          <footer>
+            <Link to="/login">
+              ¿Ya tienes cuenta? Inicia sesión.
+            </Link>
+            <Button
+              secondary
+              type="submit"
+            >
+              Confirmar
+            </Button>
+          </footer>
+        </form>
+      </section>
+    </div>
+    
+    </Fragment>
   )
 }
