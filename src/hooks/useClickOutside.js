@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 
-export const useClickOutside = ( ref, onClickOutside ) => {
+export const useClickOutside = ( ref, onClickOutside, otherRef ) => {
   useEffect(() => {
 
     /**
      * Alert if clicked on outside of element
      */
     const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
+      event.stopPropagation();
+      if (ref.current && !ref.current.contains(event.target) && (otherRef ? !otherRef.current.contains(event.target) : true)) {
         onClickOutside();
       }
     }
