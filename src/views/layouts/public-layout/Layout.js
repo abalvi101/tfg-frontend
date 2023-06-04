@@ -19,36 +19,36 @@ export const Layout = ({ className, children, ...props }) => {
       {
         appState.loading
         ? <div id="loader">
-            <div class="paw-print-1">
-                <div class="pad large"></div>
-                <div class="pad small-1"></div>
-                <div class="pad small-2"></div>
-                <div class="pad small-3"></div>
-                <div class="pad small-4"></div>
+            <div className="paw-print-1">
+                <div className="pad large"></div>
+                <div className="pad small-1"></div>
+                <div className="pad small-2"></div>
+                <div className="pad small-3"></div>
+                <div className="pad small-4"></div>
             </div>
                 
-            <div class="paw-print-2">
-                <div class="pad large"></div>
-                <div class="pad small-1"></div>
-                <div class="pad small-2"></div>
-                <div class="pad small-3"></div>
-                <div class="pad small-4"></div>
+            <div className="paw-print-2">
+                <div className="pad large"></div>
+                <div className="pad small-1"></div>
+                <div className="pad small-2"></div>
+                <div className="pad small-3"></div>
+                <div className="pad small-4"></div>
             </div>    
                 
-            <div class="paw-print-3">
-                <div class="pad large"></div>
-                <div class="pad small-1"></div>
-                <div class="pad small-2"></div>
-                <div class="pad small-3"></div>
-                <div class="pad small-4"></div>
+            <div className="paw-print-3">
+                <div className="pad large"></div>
+                <div className="pad small-1"></div>
+                <div className="pad small-2"></div>
+                <div className="pad small-3"></div>
+                <div className="pad small-4"></div>
             </div>    
                 
-            <div class="paw-print-4">
-                <div class="pad large"></div>
-                <div class="pad small-1"></div>
-                <div class="pad small-2"></div>
-                <div class="pad small-3"></div>
-                <div class="pad small-4"></div>
+            <div className="paw-print-4">
+                <div className="pad large"></div>
+                <div className="pad small-1"></div>
+                <div className="pad small-2"></div>
+                <div className="pad small-3"></div>
+                <div className="pad small-4"></div>
             </div>
 {/*                 
             <div class="paw-print-5">

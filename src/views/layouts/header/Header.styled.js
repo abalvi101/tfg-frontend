@@ -75,10 +75,10 @@ const Header = styled(UnstyledHeader)`
     align-items: center;
   }
   .user-profile .user-menu {
-    min-width: 164px;
+    min-width: 190px;
     position: absolute;
-    top: calc(100%);
-    right: ${PADDING_HORIZONTAL_DESKTOP};
+    top: 100%;
+    right: calc(${PADDING_HORIZONTAL_DESKTOP} - 32px);
     padding: 12px 32px;
     background-color: ${props => props.theme.background};
     flex-direction: column;

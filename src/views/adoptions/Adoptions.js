@@ -15,10 +15,15 @@ export const Adoptions = ({ className, }) => {
   const [appState, appStateUpdate] = useAppState();
   const [animals, setAnimals] = useState([]);
   const [species, setSpecies] = useState([]);
+  const [filteredSpecies, setFilteredSpecies] = useState([]);
   const [breeds, setBreeds] = useState([]);
+  const [filteredBreeds, setFilteredBreeds] = useState([]);
   const [sizes, setSizes] = useState([]);
+  const [filteredSizes, setFilteredSizes] = useState([]);
   const [provinces, setProvinces] = useState([]);
+  const [filteredProvinces, setFilteredProvinces] = useState([]);
   const [cities, setCities] = useState([]);
+  const [filteredCities, setFilteredCities] = useState([]);
   const [filters, setFilters] = useState([
     {
       value: '',
@@ -33,6 +38,7 @@ export const Adoptions = ({ className, }) => {
       key: 'breed',
       type: 'select',
       options: [],
+      consolee: true
     },
     {
       value: '',
@@ -88,30 +94,35 @@ export const Adoptions = ({ className, }) => {
         .get(ENDPOINTS.LOCATION.GET_CITIES)
         .then(({data}) => {
           setCities(data.data);
+          setFilteredCities(data.data);
         })
         .catch((error) => console.log('Error especies animales:', error));
       await axios
         .get(ENDPOINTS.LOCATION.GET_PROVINCES)
         .then(({data}) => {
           setProvinces(data.data);
+          setFilteredProvinces(data.data);
         })
         .catch((error) => console.log('Error especies animales:', error));
       await axios
         .get(ENDPOINTS.ANIMAL.GET_SPECIES)
         .then(({data}) => {
           setSpecies(data.data);
+          setFilteredSpecies(data.data);
         })
         .catch((error) => console.log('Error especies animales:', error));
       await axios
         .get(ENDPOINTS.ANIMAL.GET_BREEDS)
         .then(({data}) => {
           setBreeds(data.data);
+          setFilteredBreeds(data.data);
         })
         .catch((error) => console.log('Error razas animales:', error));
       await axios
         .get(ENDPOINTS.ANIMAL.GET_SIZES)
         .then(({data}) => {
           setSizes(data.data);
+          setFilteredSizes(data.data);
         })
         .catch((error) => console.log('Error tamaños animales:', error));
       appStateUpdate.finishLoading();
@@ -128,7 +139,7 @@ export const Adoptions = ({ className, }) => {
     );
     if (index !== -1) {
       let auxFilters = copyObject(filters);
-      auxFilters[index].options = provinces.map(
+      auxFilters[index].options = filteredProvinces.map(
         (province) => ({
           key: province.id,
           value: province.id,
@@ -144,7 +155,7 @@ export const Adoptions = ({ className, }) => {
       )
       setFilters(auxFilters);
     }
-  }, [provinces])
+  }, [filteredProvinces])
 
   useEffect(() => {
     let index = filters.findIndex(
@@ -152,7 +163,7 @@ export const Adoptions = ({ className, }) => {
     );
     if (index !== -1) {
       let auxFilters = copyObject(filters);
-      auxFilters[index].options = cities.map(
+      auxFilters[index].options = filteredCities.map(
         (city) => ({
           key: city.id,
           value: city.id,
@@ -168,7 +179,7 @@ export const Adoptions = ({ className, }) => {
       )
       setFilters(auxFilters);
     }
-  }, [cities])
+  }, [filteredCities])
 
   useEffect(() => {
     let index = filters.findIndex(
@@ -176,7 +187,7 @@ export const Adoptions = ({ className, }) => {
     );
     if (index !== -1) {
       let auxFilters = copyObject(filters);
-      auxFilters[index].options = species.map(
+      auxFilters[index].options = filteredSpecies.map(
         (specie) => ({
           key: specie.id,
           value: specie.id,
@@ -192,15 +203,16 @@ export const Adoptions = ({ className, }) => {
       )
       setFilters(auxFilters);
     }
-  }, [species])
+  }, [filteredSpecies])
 
   useEffect(() => {
+    console.log({filteredBreeds})
     let index = filters.findIndex(
       (field) => field.key === 'breed'
     );
     if (index !== -1) {
       let auxFilters = copyObject(filters);
-      auxFilters[index].options = breeds.map(
+      auxFilters[index].options = filteredBreeds.map(
         (breed) => ({
           key: breed.id,
           value: breed.id,
@@ -216,7 +228,7 @@ export const Adoptions = ({ className, }) => {
       )
       setFilters(auxFilters);
     }
-  }, [breeds])
+  }, [filteredBreeds])
 
   useEffect(() => {
     let index = filters.findIndex(
@@ -224,7 +236,7 @@ export const Adoptions = ({ className, }) => {
     );
     if (index !== -1) {
       let auxFilters = copyObject(filters);
-      auxFilters[index].options = sizes.map(
+      auxFilters[index].options = filteredSizes.map(
         (size) => ({
           key: size.id,
           value: size.id,
@@ -240,9 +252,10 @@ export const Adoptions = ({ className, }) => {
       )
       setFilters(auxFilters);
     }
-  }, [sizes])
+  }, [filteredSizes])
 
   const getAnimals = async () => {
+    appStateUpdate.startLoading();
     let parameters = {}
     filters.map(
       (field) => {
@@ -257,18 +270,21 @@ export const Adoptions = ({ className, }) => {
       .catch((error) => {
         console.log('error animals', error)
       })
+      .finally(() => 
+      appStateUpdate.finishLoading())
   }
 
   const onChangeFilterHandler = (value, index) => {
     let auxFilters = copyObject(filters);
     auxFilters[index].value = value;
-    auxFilters[index].error = '';
+    updateFilters(value, index);
     setFilters(auxFilters);
   }
 
-  const onLike = (event, id) => {
+  const onLike = async (event, id) => {
     event.stopPropagation();
-    axios
+    appStateUpdate.startLoading();
+    await axios
       .post(ENDPOINTS.AUTH.FAVOURITE, {animal_id: id})
       .then(({data}) => {
         if (data.success) {
@@ -278,7 +294,30 @@ export const Adoptions = ({ className, }) => {
         }
       })
       .catch((error) => console.log('Error en al añadir/quitar favorito', error))
-  } 
+      .finally(() => appStateUpdate.startLoading().finishLoading())
+  }
+
+  const updateFilters = (value, index) => {
+    let auxFilters = copyObject(filters);
+    if (auxFilters[index].key === 'specie') {
+      if (!value) {
+        setFilteredBreeds(breeds);
+      } else {
+        setFilteredBreeds(breeds.filter(
+          (breed) => breed.animal_specie_id === value
+        ))
+      }
+    }
+    // if (auxFilters[index].key = 'breed') {
+    //   if (!value) {
+    //     setFilteredSpecies(species);
+    //   } else {
+    //     setFilteredSpecies(species.filter(
+    //       (specie) => specie.id === breeds.find((breed) => breed.id === value).animal_specie_id
+    //     ))
+    //   }
+    // }
+  }
 
   return (
     <div className={className}>

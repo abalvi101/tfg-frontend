@@ -22,13 +22,11 @@ export const Header = ({ className, }) => {
     setIsUserMenuVisible(false);
   }
 
-  const openMenu = () => {
-    console.log({isMenuVisible, open: null})
+  const toggleMenu = () => {
     setIsMenuVisible(!isMenuVisible);
   }
 
   const closeMenu = () => {
-    console.log({isMenuVisible, close: null})
     setIsMenuVisible(false);
   }
 
@@ -80,7 +78,6 @@ export const Header = ({ className, }) => {
               <section
                 className="user-profile"
                 onClick={toggleUserMenu}
-                ref={userMenuRef}
               >
                 <span>{user.name}</span>
                 <img
@@ -90,6 +87,7 @@ export const Header = ({ className, }) => {
                 />
                 <ul
                   className={`user-menu ${isUserMenuVisible ? null : 'hidden'}`}
+                  ref={userMenuRef}
                 >
                   <li onClick={() => {closeUserMenu(); closeMenu()}}>
                     <Link to='/perfil'>Perfil</Link>
@@ -112,7 +110,7 @@ export const Header = ({ className, }) => {
       </nav>
       <img
         ref={iconMenuRef}
-        onClick={openMenu}
+        onClick={toggleMenu}
         className='icon-menu'
         src="/icons/menu.svg"
         alt="menu"

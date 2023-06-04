@@ -1,21 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 
-export const Select = ({ className, label, value, options, onChange, error }) => {
+export const Select = ({ className, label, value, options, onChange, error, consolee }) => {
 
   const inputRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
   const [search, setSearch] = useState('');
   const [filteredOptions, setFilteredOptions] = useState([]);
 
-  useEffect(() => {
-  }, [])
+  if (consolee) console.log({options})
 
   useEffect(() => {
     filterOptions();
   }, [options])
 
   useEffect(() => {
-    let selectedOption = options?.find((option) => option.value === value)?.name;
+    let selectedOption = options?.find((option) => option.value == value)?.name;
     if (selectedOption)
       setSearch(selectedOption);
   }, [value, options])
@@ -24,7 +23,19 @@ export const Select = ({ className, label, value, options, onChange, error }) =>
     filterOptions();
   }, [search])
 
+  useEffect(() => {
+    if (isFocused)
+      setSearch('');
+    else {
+      let selectedOption = options?.find((option) => option.value == value)?.name;
+      console.log({selectedOption})
+      if (selectedOption)
+      setSearch(selectedOption);
+    }
+  }, [isFocused])
+
   const filterOptions = () => {
+    // console.log({options})
     let auxFilteredOptions = options?.filter(
       (option) => option.name.toLowerCase().includes(search.toLowerCase())
     )
