@@ -7,7 +7,6 @@ export const Select = ({ className, label, value, options, onChange, error, cons
   const [search, setSearch] = useState('');
   const [filteredOptions, setFilteredOptions] = useState([]);
 
-  if (consolee) console.log({options})
 
   useEffect(() => {
     filterOptions();
@@ -28,14 +27,12 @@ export const Select = ({ className, label, value, options, onChange, error, cons
       setSearch('');
     else {
       let selectedOption = options?.find((option) => option.value == value)?.name;
-      console.log({selectedOption})
       if (selectedOption)
       setSearch(selectedOption);
     }
   }, [isFocused])
 
   const filterOptions = () => {
-    // console.log({options})
     let auxFilteredOptions = options?.filter(
       (option) => option.name.toLowerCase().includes(search.toLowerCase())
     )

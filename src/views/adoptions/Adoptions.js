@@ -206,7 +206,6 @@ export const Adoptions = ({ className, }) => {
   }, [filteredSpecies])
 
   useEffect(() => {
-    console.log({filteredBreeds})
     let index = filters.findIndex(
       (field) => field.key === 'breed'
     );
@@ -277,7 +276,7 @@ export const Adoptions = ({ className, }) => {
   const onChangeFilterHandler = (value, index) => {
     let auxFilters = copyObject(filters);
     auxFilters[index].value = value;
-    updateFilters(value, index);
+    auxFilters = updateFilters(auxFilters, value, index);
     setFilters(auxFilters);
   }
 
@@ -297,8 +296,7 @@ export const Adoptions = ({ className, }) => {
       .finally(() => appStateUpdate.startLoading().finishLoading())
   }
 
-  const updateFilters = (value, index) => {
-    let auxFilters = copyObject(filters);
+  const updateFilters = (auxFilters, value, index) => {
     if (auxFilters[index].key === 'specie') {
       if (!value) {
         setFilteredBreeds(breeds);
@@ -306,9 +304,18 @@ export const Adoptions = ({ className, }) => {
         setFilteredBreeds(breeds.filter(
           (breed) => breed.animal_specie_id === value
         ))
+
+
+        let breedIndex = filters.findIndex(
+          (field) => field.key === 'breed'
+        );
+        if (breeds.find((breed) => breed.id === auxFilters[breedIndex].value)?.animal_specie_id !== value)
+          auxFilters[breedIndex].value = null;
       }
     }
-    // if (auxFilters[index].key = 'breed') {
+
+
+    // if (auxFilters[index].key === 'breed') {
     //   if (!value) {
     //     setFilteredSpecies(species);
     //   } else {
@@ -317,6 +324,36 @@ export const Adoptions = ({ className, }) => {
     //     ))
     //   }
     // }
+    
+    if (auxFilters[index].key === 'province') {
+      if (!value) {
+        setFilteredCities(cities);
+      } else {
+        setFilteredCities(cities.filter(
+          (city) => city.province_id === value
+        ))
+
+
+        let cityIndex = filters.findIndex(
+          (field) => field.key === 'city'
+        );
+        if (cities.find((city) => city.id === auxFilters[cityIndex].value)?.province_id !== value)
+          auxFilters[cityIndex].value = null;
+      }
+    }
+
+    
+    // if (auxFilters[index].key === 'city') {
+    //   if (!value) {
+    //     setFilteredProvinces(provinces);
+    //   } else {
+    //     setFilteredProvinces(provinces.filter(
+    //       (province) => province.id === cities.find((city) => city.id === value).province_id
+    //     ))
+    //   }
+    // }
+
+    return auxFilters;
   }
 
   return (
