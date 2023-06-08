@@ -2,19 +2,22 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { ENDPOINTS } from "../../../consts/api";
+import { useAppState } from "../../hooks";
 import AnimalAdmin from "./animal-admin/AnimalAdmin.styled";
 import AnimalViewer from "./animal-viewer/AnimalViewer.styled";
 
-export default ({ className }) => {
+const Animal = () => {
   const { animalID } = useParams();
   const [animal, setAnimal] = useState({});
+  const [appState, appStateUpdate] = useAppState();
 
   useEffect(() => {
     getAnimal();
   }, [animalID])
 
-  const getAnimal = () => {
-    axios
+  const getAnimal = async () => {
+    appStateUpdate.startLoading();
+    await axios
       .post(ENDPOINTS.ANIMAL.GET_ANIMAL_INFO, {animal_id: animalID})
       .then(({data}) => {
         if (data.success) {
@@ -24,6 +27,7 @@ export default ({ className }) => {
         }
       })
       .catch((error) => console.log('Getting animal info', error))
+      .finally(() => appStateUpdate.finishLoading())
   }
 
   return (
@@ -32,3 +36,5 @@ export default ({ className }) => {
     : <AnimalViewer animal={animal} />
   )
 }
+
+export default Animal;
