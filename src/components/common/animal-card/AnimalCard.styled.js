@@ -15,6 +15,7 @@ const AnimalCard = styled(UnstyledAnimalCard)`
     border-radius: 0 0 6px 6px;
     border: 1px solid ${props => props.theme.grey};
     border-top: 0;
+    position: relative;
   }
   section.card-info * {
     font-size: 14px;
@@ -56,6 +57,15 @@ const AnimalCard = styled(UnstyledAnimalCard)`
   }
   .body {
     position: relative;
+  }
+
+
+  @media only screen and (max-width: 696px) {
+    img.like {
+      position: absolute;
+      right: 8px;
+      top: -32px;
+    }
   }
 `
 
