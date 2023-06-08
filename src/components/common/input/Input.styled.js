@@ -13,7 +13,7 @@ const Input = styled(UnstyledInput)`
     border: 0;
     padding: ${props => props.error ? '0.75rem 1.15rem' : '0.8rem 1.2rem'};
     outline: none;
-    font-size: 1rem;
+    font-size: 14px;
     transition-duration: 0.6s;
     border: ${props => props.error ? `0.05px solid ${props.theme.error}` : 'none'};
   }
@@ -32,13 +32,13 @@ const Input = styled(UnstyledInput)`
     position: absolute;
     left: ${props => props.value ? '0.7rem' : '1.2rem'};
     top: ${props => props.value ? '-50%' : '0'};
-    font-size: ${props => props.value ? '0.9rem' : 'inherit'};
+    font-size: ${props => props.value ? '14px' : 'inherit'};
     /* text-shadow: ${props => props.value ? '1px 1px 2px ' + props.theme.shadow : 'none'}; */
     transition-duration: 0.6s;
     cursor: text;
   }
   input:focus ~ label {
-    font-size: 0.9rem;
+    font-size: 14px;
     /* text-shadow: 1px 1px 2px ${props => props.theme.shadow}; */
     color: ${props => props.error ? props.theme.error : props.theme.intermediateFont};
     top: -50%;
@@ -46,7 +46,7 @@ const Input = styled(UnstyledInput)`
   }
   .error {
     color: ${props => props.theme.error};
-    font-size: 0.9rem;
+    font-size: 12px;
     margin-top: 0.6rem;
     transition: 5s ease;
   }

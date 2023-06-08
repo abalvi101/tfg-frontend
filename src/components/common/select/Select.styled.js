@@ -11,7 +11,7 @@ const Select = styled(UnstyledSelect)`
     margin-bottom: 0.2rem;
     outline: none;
     border: ${props => props.error ? `1px solid ${props.theme.error}` : null};
-    font-size: 1rem;
+    font-size: 14px;
     transition-duration: 0.6s;
     border: ${props => props.error ? '0.05px solid ' + props.theme.error : 'none'};
     /* caret-color: transparent; */
@@ -41,6 +41,7 @@ const Select = styled(UnstyledSelect)`
   .option {
     padding: 0.4rem 1.2rem;
     cursor: pointer;
+    font-size: 14px;
   }
   .option:hover {
     background-color: #ddd;
@@ -50,7 +51,7 @@ const Select = styled(UnstyledSelect)`
   }
   .error {
     color: ${props => props.theme.error};
-    font-size: 0.9rem;
+    font-size: 12px;
     margin-top: 0.6rem;
     transition: 5s ease;
   }
