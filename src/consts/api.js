@@ -22,5 +22,8 @@ export const ENDPOINTS = {
     UPDATE_IMAGE: 'animals/updateImage',
     STORE_FOSTERING: 'animals/storeFostering',
     DELETE_FOSTERING: 'animals/deleteFostering',
+  },
+  ASSOCIATION: {
+    GET_FILTERED_ASSOCIATIONS: 'associations/getFilteredAssociations',
   }
 };

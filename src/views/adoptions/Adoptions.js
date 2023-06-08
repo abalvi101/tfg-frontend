@@ -26,14 +26,14 @@ export const Adoptions = ({ className, }) => {
   const [filteredCities, setFilteredCities] = useState([]);
   const [filters, setFilters] = useState([
     {
-      value: '',
+      value: null,
       label: 'Especie',
       key: 'specie',
       type: 'select',
       options: [],
     },
     {
-      value: '',
+      value: null,
       label: 'Raza',
       key: 'breed',
       type: 'select',
@@ -41,28 +41,28 @@ export const Adoptions = ({ className, }) => {
       consolee: true
     },
     {
-      value: '',
+      value: null,
       label: 'Tamaño',
       key: 'size',
       type: 'select',
       options: [],
     },
     {
-      value: '',
+      value: null,
       label: 'Provincia',
       key: 'province',
       type: 'select',
       options: [],
     },
     {
-      value: '',
+      value: null,
       label: 'Ciudad',
       key: 'city',
       type: 'select',
       options: [],
     },
     {
-      value: '',
+      value: null,
       label: 'Género',
       key: 'gender',
       type: 'select',
@@ -96,14 +96,14 @@ export const Adoptions = ({ className, }) => {
           setCities(data.data);
           setFilteredCities(data.data);
         })
-        .catch((error) => console.log('Error especies animales:', error));
+        .catch((error) => console.log('Error ciudades:', error));
       await axios
         .get(ENDPOINTS.LOCATION.GET_PROVINCES)
         .then(({data}) => {
           setProvinces(data.data);
           setFilteredProvinces(data.data);
         })
-        .catch((error) => console.log('Error especies animales:', error));
+        .catch((error) => console.log('Error provincias:', error));
       await axios
         .get(ENDPOINTS.ANIMAL.GET_SPECIES)
         .then(({data}) => {
@@ -150,7 +150,7 @@ export const Adoptions = ({ className, }) => {
         {
           key: null,
           value: null,
-          name: 'Todas',
+          name: 'Cualquiera',
         }
       )
       setFilters(auxFilters);
@@ -174,7 +174,7 @@ export const Adoptions = ({ className, }) => {
         {
           key: null,
           value: null,
-          name: 'Todas',
+          name: 'Cualquiera',
         }
       )
       setFilters(auxFilters);
@@ -198,7 +198,7 @@ export const Adoptions = ({ className, }) => {
         {
           key: null,
           value: null,
-          name: 'Todas',
+          name: 'Cualquiera',
         }
       )
       setFilters(auxFilters);
@@ -222,7 +222,7 @@ export const Adoptions = ({ className, }) => {
         {
           key: null,
           value: null,
-          name: 'Todas',
+          name: 'Cualquiera',
         }
       )
       setFilters(auxFilters);
@@ -246,7 +246,7 @@ export const Adoptions = ({ className, }) => {
         {
           key: null,
           value: null,
-          name: 'Todas',
+          name: 'Cualquiera',
         }
       )
       setFilters(auxFilters);
@@ -269,8 +269,7 @@ export const Adoptions = ({ className, }) => {
       .catch((error) => {
         console.log('error animals', error)
       })
-      .finally(() => 
-      appStateUpdate.finishLoading())
+      .finally(() => appStateUpdate.finishLoading())
   }
 
   const onChangeFilterHandler = (value, index) => {

@@ -19,6 +19,7 @@ import ProtectedRoute from "./components/common/protected-route/ProtectedRoute";
 import { useAuth } from "./hooks";
 import Profile from "./components/views/profile/Profile.styled";
 import Animal from "./components/views/animal/Animal.styled";
+import Associations from "./views/associations/Associations.styled";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/adopciones",
         element: <Adoptions />,
+      },
+      {
+        path: "/asociaciones",
+        element: <Associations />,
       },
       {
         path: "/login",

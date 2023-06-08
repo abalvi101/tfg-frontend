@@ -43,7 +43,7 @@ const AnimalCard = styled(UnstyledAnimalCard)`
     align-items: center;
     gap: 12px;
   }
-  header h3 {
+  .card-info > header h3 {
     display: flex;
     font-weight: 500;
     font-size: 16px;
@@ -61,6 +61,13 @@ const AnimalCard = styled(UnstyledAnimalCard)`
 
 
   @media only screen and (max-width: 696px) {
+
+    section.card-info * {
+      font-size: 12px;
+    }
+    .card-info > header h3 {
+      font-size: 14px;
+    }
     img.like {
       position: absolute;
       right: 8px;
