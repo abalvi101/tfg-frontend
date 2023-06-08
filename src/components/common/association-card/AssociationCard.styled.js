@@ -6,6 +6,7 @@ const AssociationCard = styled(UnstyledAssociationCard)`
   display: flex;
   align-items: center;
   /* gap: 32px; */
+  justify-content: space-between;
   font-size: 14px;
 
   .logo {
@@ -18,16 +19,16 @@ const AssociationCard = styled(UnstyledAssociationCard)`
       : 'background-color: grey;'
     }
     border-radius: 50%;
-    width: 100px;
     aspect-ratio: 1;
-    margin-right: 24px;
+    /* margin-right: 24px; */
+    width: 33%;
   }
 
   .info {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    flex-grow: 1;
+    width: 57%;
   }
   .info > h3 {
     margin-bottom: 6px;
@@ -37,12 +38,15 @@ const AssociationCard = styled(UnstyledAssociationCard)`
 
   @media only screen and (max-width: 1024px) {
     font-size: 12px;
-    
-    .logo {
-      width: 80px
-    }
     .info > h3 {
       font-size: 14px
+    }
+  }
+
+  @media only screen and (max-width: 425px) {
+    font-size: 14px;
+    .info > h3 {
+      font-size: 16px
     }
   }
 `;
