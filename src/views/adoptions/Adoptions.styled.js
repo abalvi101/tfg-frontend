@@ -14,8 +14,8 @@ const Adoptions = styled(UnstyledAdoptions)`
   .filters {    
     margin-bottom: 2rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 0.6rem 3%;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    grid-gap: 24px 16px;
   }
   .filters .filter_button {
     justify-self: flex-end;
@@ -27,6 +27,9 @@ const Adoptions = styled(UnstyledAdoptions)`
     .animals {
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
+    .filters {    
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
   }
 
   @media only screen and (max-width: 696px) {
@@ -34,12 +37,20 @@ const Adoptions = styled(UnstyledAdoptions)`
       grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       grid-gap: 24px 12px;
     }
+    .filters {    
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-gap: 18px 12px;
+    }
   }
 
   @media only screen and (max-width: 464px) {
     .animals {
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       grid-gap: 24px 8px;
+    }
+    .filters {    
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-gap: 18px 8px;
     }
   }
 `

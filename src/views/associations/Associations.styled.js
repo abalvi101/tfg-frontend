@@ -14,8 +14,8 @@ const Associations = styled(UnstyledAssociations)`
   .filters {    
     margin-bottom: 2rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 16px 3%;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-gap: 16px 16px;
   }
   .filters .filter_button {
     justify-self: flex-end;
@@ -31,6 +31,10 @@ const Associations = styled(UnstyledAssociations)`
     .associations {
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       grid-gap: 32px 20px;
+    }
+    .filters {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-gap: 16px 20px;
     }
   }
 `
