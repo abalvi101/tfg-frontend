@@ -18,14 +18,14 @@ const Footer = styled(UnstyledFooter)`
     align-items: center;
   }
   .brand img {
-    width: 10rem;
+    width: 160px;
   }
   .rrss {
     display: flex;
     gap: 1rem;
   }
   .rrss > .icon {
-    width: 1.5rem;
+    width: 24px;
     cursor: pointer;
   }
   .links > ul {
@@ -34,9 +34,10 @@ const Footer = styled(UnstyledFooter)`
   }
   .links > ul li {
     cursor: pointer;
+    font-size: 14px;
   }
 
-@media only screen and (max-width: 425px) {
+@media only screen and (max-width: 525px) {
   .content {
     flex-direction: column;
     align-items: center;

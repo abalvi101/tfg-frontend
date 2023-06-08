@@ -41,7 +41,11 @@ export const Header = ({ className, }) => {
     {
       path: 'adopciones',
       label: 'Adopciones',
-    }
+    },
+    {
+      path: 'asociaciones',
+      label: 'Asociaciones',
+    },
   ]
 
   const checkSelected = (path) => {

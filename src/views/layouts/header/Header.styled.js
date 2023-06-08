@@ -108,10 +108,46 @@ const Header = styled(UnstyledHeader)`
 
 
 
+  @media only screen and (max-width: 1024px) {
+    nav {
+      gap: 64px;
+    }
+  }
+
+  @media only screen and (max-width: 950px) {
+    nav ul {
+      gap: 25px;
+    }
+    nav > ul li:nth-child(n + 2)::before {
+      content: '';
+      height: 16px;
+      width: 1.3px;
+      background-color: rgb(215, 215, 215);
+      position: absolute;
+      top: 50%;
+      left: -12px;
+      translate: 0 -50%;
+    }
+  }
+  
+  @media only screen and (max-width: 870px) {
+    .brand h1 {
+      font-size: 18px;
+    }
+    nav {
+      gap: 42px;
+    }
+    .user-profile {
+      gap: 12px;
+    }
+  }
   
   @media only screen and (max-width: 768px) {
     padding: 8px ${PADDING_HORIZONTAL_MOBILE};
 
+    .brand h1 {
+      font-size: 24px;
+    }
     nav {
       min-width: 164px;
       position: absolute;
