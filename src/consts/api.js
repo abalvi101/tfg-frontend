@@ -25,5 +25,6 @@ export const ENDPOINTS = {
   },
   ASSOCIATION: {
     GET_FILTERED_ASSOCIATIONS: 'associations/getFilteredAssociations',
+    GET_ASSOCIATION_INFO: 'associations/getAssociationInfo',
   }
 };

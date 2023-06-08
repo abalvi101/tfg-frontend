@@ -20,6 +20,7 @@ import { useAuth } from "./hooks";
 import Profile from "./components/views/profile/Profile.styled";
 import Animal from "./components/views/animal/Animal";
 import Associations from "./views/associations/Associations.styled";
+import Association from "./views/association/Association.styled";
 
 const router = createBrowserRouter([
   {
@@ -60,7 +61,11 @@ const router = createBrowserRouter([
       {
         path: "/animal/:animalID",
         element: <Animal />,
-      }
+      },
+      {
+        path: "/asociacion/:associationID",
+        element: <Association />,
+      },
     ]
   }
 ]);

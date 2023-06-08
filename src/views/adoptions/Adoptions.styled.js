@@ -8,7 +8,7 @@ const Adoptions = styled(UnstyledAdoptions)`
     width: 100%;
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     grid-gap: 32px 16px;
   }
   .filters {    

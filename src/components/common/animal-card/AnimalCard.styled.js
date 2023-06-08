@@ -32,6 +32,7 @@ const AnimalCard = styled(UnstyledAnimalCard)`
     position: absolute;
     top: -1rem;
     right: -1rem;
+    z-index: 2;
   }
   header {
     display: flex;

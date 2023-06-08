@@ -22,11 +22,15 @@ const Associations = styled(UnstyledAssociations)`
     align-self: flex-end;
     grid-column-start: -2;
   }
+
   @media only screen and (max-width: 1024px) {
     padding: 5%;
+  }
+  @media only screen and (max-width: 768px) {
+    
     .associations {
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      grid-gap: 32px 24px;
+      grid-gap: 32px 20px;
     }
   }
 `
