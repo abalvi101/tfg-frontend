@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export const Select = ({ className, label, value, options, onChange, error, consolee }) => {
+export const Select = ({ className, label, value, options, onChange, error }) => {
 
   const inputRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
