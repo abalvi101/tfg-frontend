@@ -5,6 +5,7 @@ import { ENDPOINTS } from "../../../../consts/api";
 import { copyObject, validateForm } from "../../../../utils";
 import Button from "../../../../components/common/button";
 import Input from "../../../../components/common/input";
+import { useAppState } from "../../../../hooks";
 
 const defaultForm = [
   {
@@ -28,7 +29,7 @@ const defaultForm = [
   },
   {
     value: moment().format('YYYY-MM-DD'),
-    label: 'Día de entrada a la asociación',
+    label: 'Día de entrada',
     key: 'entry_date',
     type: 'date',
     rules: {
@@ -38,7 +39,7 @@ const defaultForm = [
   },
   {
     value: '',
-    label: 'Provincia donde se encuentra',
+    label: 'Provincia',
     key: 'province_id',
     type: 'select',
     rules: {
@@ -49,7 +50,7 @@ const defaultForm = [
   },
   {
     value: '',
-    label: 'Ciudad donde se encuentra',
+    label: 'Ciudad',
     key: 'city_id',
     type: 'select',
     rules: {
@@ -153,6 +154,7 @@ const defaultForm = [
 
 export default ({ className, animal, onSuccess, provinces, cities, species, breeds, sizes }) => {
   const [form, setForm] = useState(defaultForm);
+  const [appState, appStateUpdate] = useAppState();
 
   useEffect(() => {
     if (animal) {
@@ -275,8 +277,11 @@ export default ({ className, animal, onSuccess, provinces, cities, species, bree
 
   const onSubmitHandler = async (event, form) => {
     event.preventDefault();
-    if (!validateForm(form, setForm))
+    appStateUpdate.startLoading();
+    if (!validateForm(form, setForm)) {
+      appStateUpdate.finishLoading();
       return false;
+    }
     let data = {}
     form.map(
       (input) => {
@@ -293,6 +298,7 @@ export default ({ className, animal, onSuccess, provinces, cities, species, bree
     .catch((error) => {
       console.log(error)
     })
+    .finally(() => appStateUpdate.finishLoading())
   }
 
   return (
@@ -307,7 +313,7 @@ export default ({ className, animal, onSuccess, provinces, cities, species, bree
 
       <section className="form">
         {
-          form.map(
+          form.slice(0, -1).map(
             (input, index) => (
               <Input
                 {...input}
@@ -316,13 +322,21 @@ export default ({ className, animal, onSuccess, provinces, cities, species, bree
             )
           )
         }
+        <div className='textarea'>
+          <label>Descripción</label>
+          <textarea
+            rows={4}
+            value={form[form.length - 1].value}
+            onChange={(event) => onChangeInputHandler(event.target.value, form.length - 1)}
+          />
+        </div>
       </section>
         <Button
           primary
           type="submit"
           className="button"
         >
-          Confirmar
+          Guardar
         </Button>
     </form>
   )
