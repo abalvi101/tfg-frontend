@@ -312,17 +312,6 @@ export const Adoptions = ({ className, }) => {
           auxFilters[breedIndex].value = null;
       }
     }
-
-
-    // if (auxFilters[index].key === 'breed') {
-    //   if (!value) {
-    //     setFilteredSpecies(species);
-    //   } else {
-    //     setFilteredSpecies(species.filter(
-    //       (specie) => specie.id === breeds.find((breed) => breed.id === value).animal_specie_id
-    //     ))
-    //   }
-    // }
     
     if (auxFilters[index].key === 'province') {
       if (!value) {
@@ -340,17 +329,6 @@ export const Adoptions = ({ className, }) => {
           auxFilters[cityIndex].value = null;
       }
     }
-
-    
-    // if (auxFilters[index].key === 'city') {
-    //   if (!value) {
-    //     setFilteredProvinces(provinces);
-    //   } else {
-    //     setFilteredProvinces(provinces.filter(
-    //       (province) => province.id === cities.find((city) => city.id === value).province_id
-    //     ))
-    //   }
-    // }
 
     return auxFilters;
   }

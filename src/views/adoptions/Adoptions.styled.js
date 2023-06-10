@@ -22,6 +22,8 @@ const Adoptions = styled(UnstyledAdoptions)`
     align-self: flex-end;
     grid-column-start: -2;
   }
+
+
   @media only screen and (max-width: 1024px) {
     padding: 5%;
     .animals {
