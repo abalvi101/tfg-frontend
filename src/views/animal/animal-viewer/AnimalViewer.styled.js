@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import UnstyledAnimalViewer from './AnimalViewer';
 
 const AnimalViewer = styled(UnstyledAnimalViewer)`
+  padding: 32px 64px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -21,14 +22,19 @@ const AnimalViewer = styled(UnstyledAnimalViewer)`
   .info {
     display: flex;
     flex-direction: column;
-    gap: 1.6rem;
+    gap: 32px;
   }
   .info > section {
     display: flex;
   }
   .info > section:nth-child(1) {
     flex-direction: column;
-    gap: 1rem;
+    gap: 32px;
+  }
+  .info > section:nth-child(2) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-gap: 32px 16px;
   }
   .info .fostering {
     color: ${props => props.theme.secondaryFont};
@@ -38,6 +44,28 @@ const AnimalViewer = styled(UnstyledAnimalViewer)`
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+  }
+
+
+  @media only screen and (max-width: 1024px) {
+    padding: 5%;
+    .info > section:nth-child(2) {
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .info > section:nth-child(2) {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+  }
+  @media only screen and (max-width: 426px) {
+    * {
+      font-size: 12px;
+    }
+    .info > section:nth-child(2) {
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
   }
 `
 

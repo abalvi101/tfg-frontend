@@ -44,8 +44,8 @@ export default ({ className, animal }) => {
             <h4>Tamaño</h4>
             <span>{animal.size?.name}</span>
           </div>
-        </section>
-        <section>
+        {/* </section>
+        <section> */}
           <div>
             <h4>Género</h4>
             <span>
@@ -63,11 +63,11 @@ export default ({ className, animal }) => {
             <span>{animal.birthday ?? 'Sin datos'}</span>
           </div>
           <div>
-            <h4>Día que entró en la protectora</h4>
+            <h4>Fecha de entrada</h4>
             <span>{animal.entry_date ?? 'Sin datos'}</span>
           </div>
-        </section>
-        <section>
+        {/* </section>
+        <section> */}
           <div>
             <h4>Peso</h4>
             <span>{animal.weight ?? 'Sin datos'}</span>
