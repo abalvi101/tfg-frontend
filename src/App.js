@@ -18,7 +18,7 @@ import { ENDPOINTS } from "./consts/api";
 import ProtectedRoute from "./components/common/protected-route/ProtectedRoute";
 import { useAuth } from "./hooks";
 import Profile from "./components/views/profile/Profile.styled";
-import Animal from "./components/views/animal/Animal";
+import Animal from "./views/animal/Animal";
 import Associations from "./views/associations/Associations.styled";
 import Association from "./views/association/Association.styled";
 
