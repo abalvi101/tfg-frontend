@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
-import { ENDPOINTS } from "../../../consts/api";
-import { useAppState } from "../../hooks";
+import { ENDPOINTS } from "../../consts/api";
+import { useAppState, useAuth } from "../../hooks";
 import AnimalAdmin from "./animal-admin/AnimalAdmin.styled";
 import AnimalViewer from "./animal-viewer/AnimalViewer.styled";
 
@@ -10,10 +10,11 @@ const Animal = () => {
   const { animalID } = useParams();
   const [animal, setAnimal] = useState({});
   const [appState, appStateUpdate] = useAppState();
+  const [user, userUpdate] = useAuth();
 
   useEffect(() => {
     getAnimal();
-  }, [animalID])
+  }, [animalID, user])
 
   const getAnimal = async () => {
     appStateUpdate.startLoading();
