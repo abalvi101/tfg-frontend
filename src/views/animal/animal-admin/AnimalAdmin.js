@@ -7,6 +7,8 @@ import { getBase64StringFromImage } from "../../../utils";
 import ProfileImage from "../../../components/common/profile-image/ProfileImage.styled"
 import AnimalForm from "./animal-form/AnimalForm.styled";
 import FosteringForm from "./fostering-form/FosteringForm.styled";
+import { useAppState } from "../../../hooks";
+import DiseaseForm from "./disease-form/DiseaseForm.styled";
 
 export default ({ className, animal, refresh }) => {
   const [imageBase64, setImageBase64] = useState(null);
@@ -16,47 +18,56 @@ export default ({ className, animal, refresh }) => {
   const [species, setSpecies] = useState([]);
   const [breeds, setBreeds] = useState([]);
   const [sizes, setSizes] = useState([]);
+  const [appState, appStateUpdate] = useAppState();
 
   useEffect(() => {
-    axios.get(ENDPOINTS.LOCATION.GET_PROVINCES)
-    .then(({data}) => {
-      setProvinces(data.data);
-    })
-    .catch((error) => {
-      console.log('error', error);
-    })
+    let getData = async () => {
+      appStateUpdate.startLoading();
 
-    axios.get(ENDPOINTS.LOCATION.GET_CITIES)
-    .then(({data}) => {
-      setCities(data.data);
-    })
-    .catch((error) => {
-      console.log('error', error);
-    })
+      await axios.get(ENDPOINTS.LOCATION.GET_PROVINCES)
+      .then(({data}) => {
+        setProvinces(data.data);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      })
+  
+      await axios.get(ENDPOINTS.LOCATION.GET_CITIES)
+      .then(({data}) => {
+        setCities(data.data);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      })
+  
+      await axios.get(ENDPOINTS.ANIMAL.GET_SPECIES)
+      .then(({data}) => {
+        setSpecies(data.data);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      })
+  
+      await axios.get(ENDPOINTS.ANIMAL.GET_BREEDS)
+      .then(({data}) => {
+        setBreeds(data.data);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      })
+  
+      await axios.get(ENDPOINTS.ANIMAL.GET_SIZES)
+      .then(({data}) => {
+        setSizes(data.data);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      })
 
-    axios.get(ENDPOINTS.ANIMAL.GET_SPECIES)
-    .then(({data}) => {
-      setSpecies(data.data);
-    })
-    .catch((error) => {
-      console.log('error', error);
-    })
+      appStateUpdate.finishLoading();
+    }
 
-    axios.get(ENDPOINTS.ANIMAL.GET_BREEDS)
-    .then(({data}) => {
-      setBreeds(data.data);
-    })
-    .catch((error) => {
-      console.log('error', error);
-    })
-
-    axios.get(ENDPOINTS.ANIMAL.GET_SIZES)
-    .then(({data}) => {
-      setSizes(data.data);
-    })
-    .catch((error) => {
-      console.log('error', error);
-    })
+    getData();
   }, [])
 
   useEffect(() => {
@@ -80,8 +91,9 @@ export default ({ className, animal, refresh }) => {
     if (uploadedImage) {
       getBase64StringFromImage(
         uploadedImage,
-        (value) => {
-          axios.post(ENDPOINTS.ANIMAL.UPDATE_IMAGE, {animal_id: animal.id, image: value})
+        async (value) => {
+          appStateUpdate.startLoading();
+          await axios.post(ENDPOINTS.ANIMAL.UPDATE_IMAGE, {animal_id: animal.id, image: value})
           .then(({data}) => {
             if (data.success) {
               setImage(uploadedImage);
@@ -92,6 +104,7 @@ export default ({ className, animal, refresh }) => {
           .catch((error) => {
             console.log('Error al actualizar la imagen', error);
           })
+          .finally(() => appStateUpdate.finishLoading())
         }
       )
     } else {
@@ -100,6 +113,7 @@ export default ({ className, animal, refresh }) => {
   }
 
   const onDeleteImage = () => {
+    appStateUpdate.startLoading();
     axios.post(ENDPOINTS.ANIMAL.UPDATE_IMAGE, {animal_id: animal.id, image: ''})
     .then(() => {
       setImage('');
@@ -108,6 +122,7 @@ export default ({ className, animal, refresh }) => {
     .catch((error) => {
       console.log('error submit image', error);
     })
+    .finally(() => appStateUpdate.finishLoading())
   }
 
   return (
@@ -137,6 +152,11 @@ export default ({ className, animal, refresh }) => {
         onSuccess={refresh}
         provinces={provinces}
         cities={cities}
+      />
+      
+      <DiseaseForm
+        animal={animal}
+        onSuccess={refresh}
       />
     </div>
   )

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import UnstyledAnimalAdmin from './AnimalAdmin';
 
 const AnimalAdmin = styled(UnstyledAnimalAdmin)`
+  padding: 32px 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,6 +13,11 @@ const AnimalAdmin = styled(UnstyledAnimalAdmin)`
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+  }
+
+
+  @media only screen and (max-width: 1024px) {
+    padding: 5%;
   }
 `
 
