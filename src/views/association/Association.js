@@ -67,6 +67,13 @@ export const Association = ({ className }) => {
           <h1>{association?.name}</h1>
           <span className='location'>{`${association?.city?.name}, ${association?.province?.name}`}</span>
         </div>
+        {
+          association.description &&
+          <section className='description'>
+            <h4>Descripción</h4>
+            <p>{association.description}</p>
+          </section>
+        }
       </section>
       <section className='adoption-animals'>
         <h4>Animales en adopción ({association?.animals?.length})</h4>

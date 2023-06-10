@@ -3,6 +3,9 @@ import { Association as UnstyledAssociation } from "./Association";
 
 const Association = styled(UnstyledAssociation)`
   padding: 32px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 
   .association-info {
     display: flex;
@@ -26,6 +29,16 @@ const Association = styled(UnstyledAssociation)`
   }
   .association-info > div span {
     font-size: 16px;
+  }
+  .association-info > .description {
+    font-size: 14px;
+    width: 100%;
+  }
+  .association-info > .description h4 {
+    font-size: 16px;
+  }
+  .association-info > .description p {
+    margin-top: 8px;
   }
 
   .adoption-animals {
