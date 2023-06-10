@@ -5,6 +5,7 @@ import { ENDPOINTS } from "../../../../consts/api";
 import { copyObject, validateForm } from "../../../../utils";
 import Button from "../../../../components/common/button";
 import Input from "../../../../components/common/input";
+import { useAppState } from "../../../../hooks";
 
 const defaultForm = [
   {
@@ -63,6 +64,7 @@ const defaultForm = [
 
 export default ({ className, animal, onSuccess, provinces, cities }) => {
   const [form, setForm] = useState(defaultForm);
+  const [appState, appStateUpdate] = useAppState();
 
   useEffect(() => {
     if (animal?.fostering) {
@@ -130,8 +132,11 @@ export default ({ className, animal, onSuccess, provinces, cities }) => {
 
   const onSubmitHandler = async (event, form) => {
     event.preventDefault();
-    if (!validateForm(form, setForm))
+    appStateUpdate.startLoading();
+    if (!validateForm(form, setForm)) {
+      appStateUpdate.finishLoading();
       return false;
+    }
     let data = {}
     form.map(
       (input) => {
@@ -148,10 +153,12 @@ export default ({ className, animal, onSuccess, provinces, cities }) => {
     .catch((error) => {
       console.log('Error al actualizar acogida', error);
     })
+    .finally(() => appStateUpdate.finishLoading())
   }
 
   const onDeleteHandler = (e) => {
     e.preventDefault();
+    appStateUpdate.startLoading();
     axios
       .post(ENDPOINTS.ANIMAL.DELETE_FOSTERING, {animal_id: animal.id})
       .then(({ data }) => {
@@ -162,6 +169,7 @@ export default ({ className, animal, onSuccess, provinces, cities }) => {
       .catch((error) => {
         console.log('Error al eliminar acogida', error);
       })
+      .finally(() => appStateUpdate.finishLoading())
   }
 
   return (

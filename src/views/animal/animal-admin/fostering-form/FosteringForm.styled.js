@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Input from '../../../../common/input';
+import Input from '../../../../components/common/input';
 import UnstyledFosteringForm from './FosteringForm';
 
 const FosteringForm = styled(UnstyledFosteringForm)`
