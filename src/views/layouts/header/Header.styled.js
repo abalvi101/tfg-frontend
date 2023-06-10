@@ -184,6 +184,7 @@ const Header = styled(UnstyledHeader)`
     
     .user-profile .user-menu {
       right: 0;
+      min-width: 0;
     }
     .icon-menu {
       display: initial;
