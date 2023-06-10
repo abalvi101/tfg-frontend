@@ -9,14 +9,15 @@ export const Error = ({ className, }) => {
     <Layout>
       <div className={className}>
         <h1>Oops!</h1>
-        <p>Lo sentimos, ha ocurrido un error</p>
-        <p>
-          {
-            error.status === 404
-              ? <i>Página no encontrada.</i>
-              : <i>{error.status} {error.statusText || error.message}</i>
-          }
-        </p>
+        <span>Lo sentimos, ha ocurrido un error</span>
+        {
+          error.status === 404
+            ? <section>
+                <h2>Página no encontrada</h2>
+                <p>Revisa que la URL esté bien escrita, si sigue teniendo problemas contacta con nosotros <a>aquí</a>.</p>
+              </section>
+            : <section>{error.status} {error.statusText || error.message}</section>
+        }
       </div>
     </Layout>
   );
