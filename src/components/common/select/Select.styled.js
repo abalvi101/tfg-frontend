@@ -5,6 +5,17 @@ const Select = styled(UnstyledSelect)`
   position: relative;
   width: 100%;
 
+  label {
+    font-size: 14px;
+    color: ${props => props.error ? props.theme.error : props.theme.intermediateFont};
+    position: absolute;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    left: 0.7rem;
+    top: -50%;
+    cursor: text;
+  }
   .input {
     width: 100%;
     padding: ${props => props.error ? '0.75rem 1.15rem' : '0.8rem 1.2rem'};

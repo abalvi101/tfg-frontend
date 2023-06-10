@@ -49,6 +49,7 @@ export const Select = ({ className, label, value, options, onChange, error, cons
 
   return (
     <div className={className}>
+      <label onClick={() => inputRef.current.focus()}>{label}</label>
       <input
         className={`input ${isFocused ? 'focused' : null}`}
         ref={inputRef}
