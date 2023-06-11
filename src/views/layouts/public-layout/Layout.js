@@ -3,19 +3,24 @@ import { useAppState } from "../../../hooks"
 import Footer from "../footer/Footer.styled";
 import Header from "../header"
 
-export const Layout = ({ className, children, setTheme, theme, ...props }) => {
+export const Layout = ({ className, children, setTheme, themeLight, ...props }) => {
   
   const [appState, appStateUpdate] = useAppState();
 
   return (
     <main className={className}>
-      <Header setTheme={setTheme} theme={theme} />
+      <Header setTheme={setTheme} themeLight={themeLight} />
       <section className="main-body">
           <Outlet />
           {children}
       </section>
       {/* <img src="background/Background.svg" /> */}
       <Footer/>
+      {
+        appState.notification.length
+        ? <div className="notification">Notificación</div>
+        : null
+      }
       {
         appState.loading
         ? <div id="loader">

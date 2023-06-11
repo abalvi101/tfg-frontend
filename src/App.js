@@ -30,7 +30,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '',
-      element: <Layout setTheme={setTheme} theme={theme} />,
+      element: <Layout setTheme={setTheme} themeLight={theme} />,
       errorElement: <Error />,
       children: [
         {

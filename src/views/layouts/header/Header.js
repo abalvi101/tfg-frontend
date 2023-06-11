@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import Button from "../../../components/common/button";
 import { useAuth, useClickOutside } from "../../../hooks";
 
-export const Header = ({ className, theme, setTheme }) => {
+export const Header = ({ className, themeLight, setTheme }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [user, userUpdate] = useAuth();
@@ -62,12 +62,12 @@ export const Header = ({ className, theme, setTheme }) => {
       </div>
       
       <img
-        src={`/icons/${theme ? 'light' : 'dark'}.svg`}
+        src={`/icons/${themeLight ? 'light' : 'dark'}.svg`}
         className='dark-mode'
-        onClick={() => setTheme(!theme)}
+        onClick={() => setTheme(!themeLight)}
       />
 
-      <nav className={`${isMenuVisible ? null : 'hidden'}`} ref={menuRef}>
+      <nav className={`${isMenuVisible ? '' : 'hidden'}`} ref={menuRef}>
         <ul>
           {
             routes.map(
@@ -122,7 +122,7 @@ export const Header = ({ className, theme, setTheme }) => {
         ref={iconMenuRef}
         onClick={toggleMenu}
         className='icon-menu'
-        src={`/icons/menu${theme ? '' : '-dark'}.svg`}
+        src={`/icons/menu${themeLight ? '' : '-dark'}.svg`}
         alt="menu"
       />
     </header>

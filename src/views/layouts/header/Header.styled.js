@@ -26,7 +26,6 @@ const Header = styled(UnstyledHeader)`
   }
   .brand img {
     width: 64px;
-    color: ${props => props.theme.headerBackground};
   }
   .brand h1 {
     font-size: 24px;
@@ -36,7 +35,7 @@ const Header = styled(UnstyledHeader)`
     display: flex;
     align-items: center;
     gap: 128px;
-  background-color: ${props => props.theme.headerBackground};
+    background-color: ${props => props.theme.headerBackground};
   }
   .dark-mode {
     width: 16px;
@@ -140,7 +139,7 @@ const Header = styled(UnstyledHeader)`
     }
   }
   
-  @media only screen and (max-width: 870px) {
+  @media only screen and (max-width: 918px) {
     .brand h1 {
       font-size: 18px;
     }
