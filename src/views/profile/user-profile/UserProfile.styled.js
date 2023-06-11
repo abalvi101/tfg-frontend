@@ -23,8 +23,6 @@ const UserProfile = styled(UnstyledUserProfile)`
   }
   .favourite_animals .list_animal {
     width: 100%;
-    max-width: 1080px;
-    margin: auto;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-gap: 2rem 3%;
