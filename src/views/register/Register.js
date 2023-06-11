@@ -17,6 +17,7 @@ export const Register = ({ className, }) => {
   const navigate = useNavigate();
   const [provinces, setProvinces] = useState([]);
   const [cities, setCities] = useState([]);
+  const [filteredCities, setFilteredCities] = useState([]);
   const [role, setRole] = useState('user');
   const [form, setForm] = useState({
     user: [
@@ -177,29 +178,45 @@ export const Register = ({ className, }) => {
             value: province.id,
           })
         )
+        auxForm[index].options.unshift(
+          {
+            key: null,
+            value: null,
+            name: 'Sin especificar',
+          }
+        )
         setForm({...form, association: auxForm});
       }
     }
   }, [provinces])
 
   useEffect(() => {
-    if (cities.length) {
-      let auxForm = copyObject(form.association);
-      let index = auxForm.findIndex(
-        (input) => input.key === 'city_id'
-      );
-      if (index > -1) {
-        auxForm[index].options = cities.map(
-          (city) => ({
-            name: city.name,
-            key: city.id,
-            value: city.id,
-          })
-        )
-        setForm({...form, association: auxForm});
-      }
-    }
+    setFilteredCities(cities);
   }, [cities])
+
+  useEffect(() => {
+    let auxForm = copyObject(form.association);
+    let index = auxForm.findIndex(
+      (input) => input.key === 'city_id'
+    );
+    if (index > -1) {
+      auxForm[index].options = filteredCities.map(
+        (city) => ({
+          name: city.name,
+          key: city.id,
+          value: city.id,
+        })
+      )
+      auxForm[index].options.unshift(
+        {
+          key: null,
+          value: null,
+          name: 'Sin especificar',
+        }
+      )
+      setForm({...form, association: auxForm});
+    }
+  }, [filteredCities])
 
   useEffect(() => {
     if (user.token)
@@ -260,10 +277,34 @@ export const Register = ({ className, }) => {
   }
 
   const onChangeInputHandler = (value, index) => {
+    console.log({value, index});
     let auxForm = copyObject(form);
     auxForm[role][index].value = value;
     auxForm[role][index].error = '';
+    console.log({a: auxForm[role]});
+    auxForm[role] = updateForm(auxForm[role], value, index);
+    console.log({b: auxForm[role]});
     setForm(auxForm);
+  }
+
+  const updateForm = (auxForm, value, index) => {    
+    if (auxForm[index].key === 'province_id') {
+      if (!value) {
+        setFilteredCities(cities);
+      } else {
+        setFilteredCities(cities.filter(
+          (city) => city.province_id === value
+        ))
+
+        let cityIndex = auxForm.findIndex(
+          (field) => field.key === 'city_id'
+        );
+        if (cities.find((city) => city.id === auxForm[cityIndex].value)?.province_id !== value)
+          auxForm[cityIndex].value = null;
+      }
+    }
+
+    return auxForm;
   }
 
   return (
