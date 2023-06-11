@@ -3,13 +3,13 @@ import { useAppState } from "../../../hooks"
 import Footer from "../footer/Footer.styled";
 import Header from "../header"
 
-export const Layout = ({ className, children, ...props }) => {
+export const Layout = ({ className, children, setTheme, theme, ...props }) => {
   
   const [appState, appStateUpdate] = useAppState();
 
   return (
     <main className={className}>
-      <Header />
+      <Header setTheme={setTheme} theme={theme} />
       <section className="main-body">
           <Outlet />
           {children}

@@ -12,7 +12,7 @@ const Header = styled(UnstyledHeader)`
   padding: 8px ${PADDING_HORIZONTAL_DESKTOP};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
   z-index: 10;
-  background-color: ${props => props.theme.background};
+  background-color: ${props => props.theme.headerBackground};
   
   * {
     font-family: Sora;
@@ -22,9 +22,11 @@ const Header = styled(UnstyledHeader)`
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex-grow: 1;
   }
   .brand img {
     width: 64px;
+    color: ${props => props.theme.headerBackground};
   }
   .brand h1 {
     font-size: 24px;
@@ -34,7 +36,11 @@ const Header = styled(UnstyledHeader)`
     display: flex;
     align-items: center;
     gap: 128px;
-    background-color: ${props => props.theme.background};
+  background-color: ${props => props.theme.headerBackground};
+  }
+  .dark-mode {
+    width: 16px;
+    margin-right: 32px;
   }
   nav ul {
     display: flex;
@@ -80,7 +86,7 @@ const Header = styled(UnstyledHeader)`
     top: 100%;
     right: calc(${PADDING_HORIZONTAL_DESKTOP} - 32px);
     padding: 12px 32px;
-    background-color: ${props => props.theme.background};
+    background-color: ${props => props.theme.headerBackground};
     flex-direction: column;
     gap: 17px;
     align-items: flex-end;
@@ -100,6 +106,7 @@ const Header = styled(UnstyledHeader)`
     position: absolute;
     right: ${PADDING_HORIZONTAL_MOBILE};
     width: 32px;
+    top: 11px;
     display: none;
   }
   .hidden {
@@ -111,6 +118,9 @@ const Header = styled(UnstyledHeader)`
   @media only screen and (max-width: 1024px) {
     nav {
       gap: 64px;
+    }
+    .user-profile > span {
+      display: none;
     }
   }
 
@@ -145,6 +155,13 @@ const Header = styled(UnstyledHeader)`
   @media only screen and (max-width: 768px) {
     padding: 8px ${PADDING_HORIZONTAL_MOBILE};
 
+    .dark-mode {
+      width: 24px;
+      position: absolute;
+      right: calc(5% + 24px + 24px);
+      top: 16px;
+      margin: 0;
+    }
     .brand h1 {
       font-size: 24px;
     }
@@ -197,9 +214,16 @@ const Header = styled(UnstyledHeader)`
     }
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 425px) {
     .brand h1 {
       font-size: 18px;
+    }
+  }
+
+  @media only screen and (max-width: 350px) {
+    min-height: 56px;
+    .brand img {
+      display: none;
     }
   }
 `

@@ -5,6 +5,10 @@ const Footer = styled(UnstyledFooter)`
   padding: 2rem 4.2% 1.2rem 4.2%;
   background-color: ${props => props.theme.primary};
   
+  * {
+    color: ${props => props.theme.black};
+  }
+
   .content {
     max-width: 1440px;
     margin: auto;

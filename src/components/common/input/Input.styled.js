@@ -16,6 +16,7 @@ const Input = styled(UnstyledInput)`
     font-size: 14px;
     transition-duration: 0.6s;
     border: ${props => props.error ? `0.05px solid ${props.theme.error}` : 'none'};
+    background-color: ${props => props.theme.backgroundLight};
   }
   input:focus {
     /* border: 0.05rem solid #ededed;

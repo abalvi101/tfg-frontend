@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import Button from "../../../components/common/button";
 import { useAuth, useClickOutside } from "../../../hooks";
 
-export const Header = ({ className, }) => {
+export const Header = ({ className, theme, setTheme }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [user, userUpdate] = useAuth();
@@ -60,6 +60,12 @@ export const Header = ({ className, }) => {
         <img src="/LogoWhite.svg" />
         <h1 onClick={() => navigate('/')}>ADOGTANOS</h1>
       </div>
+      
+      <img
+        src={`/icons/${theme ? 'light' : 'dark'}.svg`}
+        className='dark-mode'
+        onClick={() => setTheme(!theme)}
+      />
 
       <nav className={`${isMenuVisible ? null : 'hidden'}`} ref={menuRef}>
         <ul>
@@ -116,7 +122,7 @@ export const Header = ({ className, }) => {
         ref={iconMenuRef}
         onClick={toggleMenu}
         className='icon-menu'
-        src="/icons/menu.svg"
+        src={`/icons/menu${theme ? '' : '-dark'}.svg`}
         alt="menu"
       />
     </header>

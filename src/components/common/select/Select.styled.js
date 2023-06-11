@@ -21,12 +21,12 @@ const Select = styled(UnstyledSelect)`
     padding: ${props => props.error ? '0.75rem 1.15rem' : '0.8rem 1.2rem'};
     margin-bottom: 0.2rem;
     outline: none;
-    border: ${props => props.error ? `1px solid ${props.theme.error}` : null};
     font-size: 14px;
     transition-duration: 0.6s;
     border: ${props => props.error ? '0.05px solid ' + props.theme.error : 'none'};
     /* caret-color: transparent; */
     cursor: pointer;
+    background-color: ${props => props.theme.backgroundLight};
   }
   .options_container {
     height: 0;
@@ -41,6 +41,7 @@ const Select = styled(UnstyledSelect)`
     background-color: ${props => props.theme.backgroundLight};
     display: none;
     transition: 2s;
+    z-index: 10;
   }
   .options_container.focused {
     display: initial;

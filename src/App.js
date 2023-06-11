@@ -22,58 +22,58 @@ import Animal from "./views/animal/Animal";
 import Associations from "./views/associations/Associations.styled";
 import Association from "./views/association/Association.styled";
 
-const router = createBrowserRouter([
-  {
-    path: '',
-    element: <Layout />,
-    errorElement: <Error />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/adopciones",
-        element: <Adoptions />,
-      },
-      {
-        path: "/asociaciones",
-        element: <Associations />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/registro",
-        element: <Register />,
-      },
-      {
-        path: "/perfil",
-        element: <ProtectedRoute />,
-        children: [
-          {
-            path: "",
-            element: <Profile />,
-          },
-        ]
-      },
-      {
-        path: "/animal/:animalID",
-        element: <Animal />,
-      },
-      {
-        path: "/asociacion/:associationID",
-        element: <Association />,
-      },
-    ]
-  }
-]);
-
 function App() {
 
   const [user, userUpdate] = useAuth();
   const [theme, setTheme] = useState(true);
+
+  const router = createBrowserRouter([
+    {
+      path: '',
+      element: <Layout setTheme={setTheme} theme={theme} />,
+      errorElement: <Error />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/adopciones",
+          element: <Adoptions />,
+        },
+        {
+          path: "/asociaciones",
+          element: <Associations />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/registro",
+          element: <Register />,
+        },
+        {
+          path: "/perfil",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "",
+              element: <Profile />,
+            },
+          ]
+        },
+        {
+          path: "/animal/:animalID",
+          element: <Animal />,
+        },
+        {
+          path: "/asociacion/:associationID",
+          element: <Association />,
+        },
+      ]
+    }
+  ]);
 
   useEffect(() => {
     getUser();

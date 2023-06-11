@@ -25,6 +25,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    transition-duration: 0.6s;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: Sora;
@@ -34,6 +35,9 @@ const GlobalStyle = createGlobalStyle`
   }
   ul, ol {
     list-style: none;
+  }
+  input, textarea {
+    background-color: ${props => props.theme.backgroundLight};
   }
   
   /* @media only screen and (max-width: 1024px) {
