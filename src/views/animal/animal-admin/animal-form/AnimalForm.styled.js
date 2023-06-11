@@ -12,7 +12,7 @@ const AnimalForm = styled(UnstyledAnimalForm)`
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 2rem 3%;
+    grid-gap: 32px;
   }
   .form > *:last-child {
     grid-column-start: 1;

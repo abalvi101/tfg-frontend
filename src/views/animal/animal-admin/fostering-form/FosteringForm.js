@@ -43,7 +43,7 @@ const defaultForm = [
   },
   {
     value: '',
-    label: 'Provincia donde se encuentra',
+    label: 'Provincia',
     key: 'province_id',
     type: 'select',
     rules: {
@@ -54,7 +54,7 @@ const defaultForm = [
   },
   {
     value: '',
-    label: 'Ciudad donde se encuentra',
+    label: 'Ciudad',
     key: 'city_id',
     type: 'select',
     error: '',
@@ -65,6 +65,7 @@ const defaultForm = [
 export default ({ className, animal, onSuccess, provinces, cities }) => {
   const [form, setForm] = useState(defaultForm);
   const [appState, appStateUpdate] = useAppState();
+  const [filteredCities, setFilteredCities] = useState([]);
 
   useEffect(() => {
     if (animal?.fostering) {
@@ -99,35 +100,73 @@ export default ({ className, animal, onSuccess, provinces, cities }) => {
             value: province.id,
           })
         )
+        auxForm[index].options.unshift(
+          {
+            key: null,
+            value: null,
+            name: 'Sin especificar',
+          }
+        )
         setForm(auxForm);
       }
     }
   }, [provinces])
 
   useEffect(() => {
-    if (cities.length) {
-      let auxForm = copyObject(form);
-      let index = auxForm.findIndex(
-        (input) => input.key === 'city_id'
-      );
-      if (index > -1) {
-        auxForm[index].options = cities.map(
-          (city) => ({
-            name: city.name,
-            key: city.id,
-            value: city.id,
-          })
-        )
-        setForm(auxForm);
-      }
-    }
+    setFilteredCities(cities);
   }, [cities])
+
+  useEffect(() => {
+    let auxForm = copyObject(form);
+    let index = auxForm.findIndex(
+      (input) => input.key === 'city_id'
+    );
+    if (index > -1) {
+      auxForm[index].options = filteredCities.map(
+        (city) => ({
+          name: city.name,
+          key: city.id,
+          value: city.id,
+        })
+      )
+      auxForm[index].options.unshift(
+        {
+          key: null,
+          value: null,
+          name: 'Sin especificar',
+        }
+      )
+      setForm(auxForm);
+    }
+  }, [filteredCities])
 
   const onChangeInputHandler = (value, index) => {
     let auxForm = copyObject(form);
     auxForm[index].value = value;
     auxForm[index].error = '';
+    auxForm = updateForm(auxForm, value, index);
     setForm(auxForm);
+  }
+
+  const updateForm = (auxForm, value, index) => {
+    
+    if (auxForm[index].key === 'province_id') {
+      if (!value) {
+        setFilteredCities(cities);
+      } else {
+        setFilteredCities(cities.filter(
+          (city) => city.province_id === value
+        ))
+
+        let cityIndex = form.findIndex(
+          (field) => field.key === 'city_id'
+        );
+        if (cities.find((city) => city.id === auxForm[cityIndex].value)?.province_id !== value)
+          auxForm[cityIndex].value = null;
+      }
+    }
+
+    return auxForm;
   }
 
   const onSubmitHandler = async (event, form) => {

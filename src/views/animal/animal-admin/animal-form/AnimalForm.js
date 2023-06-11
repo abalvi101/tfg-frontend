@@ -155,6 +155,8 @@ const defaultForm = [
 export default ({ className, animal, onSuccess, provinces, cities, species, breeds, sizes }) => {
   const [form, setForm] = useState(defaultForm);
   const [appState, appStateUpdate] = useAppState();
+  const [filteredCities, setFilteredCities] = useState([]);
+  const [filteredBreeds, setFilteredBreeds] = useState([]);
 
   useEffect(() => {
     if (animal) {
@@ -187,29 +189,45 @@ export default ({ className, animal, onSuccess, provinces, cities, species, bree
             value: province.id,
           })
         )
+        auxForm[index].options.unshift(
+          {
+            key: null,
+            value: null,
+            name: 'Sin especificar',
+          }
+        )
         setForm(auxForm);
       }
     }
   }, [provinces])
 
   useEffect(() => {
-    if (cities.length) {
-      let auxForm = copyObject(form);
-      let index = auxForm.findIndex(
-        (input) => input.key === 'city_id'
-      );
-      if (index > -1) {
-        auxForm[index].options = cities.map(
-          (city) => ({
-            name: city.name,
-            key: city.id,
-            value: city.id,
-          })
-        )
-        setForm(auxForm);
-      }
-    }
+    setFilteredCities(cities);
   }, [cities])
+
+  useEffect(() => {
+    let auxForm = copyObject(form);
+    let index = auxForm.findIndex(
+      (input) => input.key === 'city_id'
+    );
+    if (index > -1) {
+      auxForm[index].options = filteredCities.map(
+        (city) => ({
+          name: city.name,
+          key: city.id,
+          value: city.id,
+        })
+      )
+      auxForm[index].options.unshift(
+        {
+          key: null,
+          value: null,
+          name: 'Sin especificar',
+        }
+      )
+      setForm(auxForm);
+    }
+  }, [filteredCities])
 
   useEffect(() => {
     if (species.length) {
@@ -225,29 +243,45 @@ export default ({ className, animal, onSuccess, provinces, cities, species, bree
             value: specie.id,
           })
         )
+        auxForm[index].options.unshift(
+          {
+            key: null,
+            value: null,
+            name: 'Sin especificar',
+          }
+        )
         setForm(auxForm);
       }
     }
   }, [species])
 
   useEffect(() => {
-    if (breeds.length) {
-      let auxForm = copyObject(form);
-      let index = auxForm.findIndex(
-        (input) => input.key === 'breed_id'
-      );
-      if (index > -1) {
-        auxForm[index].options = breeds.map(
-          (breed) => ({
-            name: breed.name,
-            key: breed.id,
-            value: breed.id,
-          })
-        )
-        setForm(auxForm);
-      }
-    }
+    setFilteredBreeds(breeds);
   }, [breeds])
+
+  useEffect(() => {
+    let auxForm = copyObject(form);
+    let index = auxForm.findIndex(
+      (input) => input.key === 'breed_id'
+    );
+    if (index > -1) {
+      auxForm[index].options = filteredBreeds.map(
+        (breed) => ({
+          name: breed.name,
+          key: breed.id,
+          value: breed.id,
+        })
+      )
+      auxForm[index].options.unshift(
+        {
+          key: null,
+          value: null,
+          name: 'Sin especificar',
+        }
+      )
+      setForm(auxForm);
+    }
+  }, [filteredBreeds])
 
   useEffect(() => {
     if (sizes.length) {
@@ -272,7 +306,44 @@ export default ({ className, animal, onSuccess, provinces, cities, species, bree
     let auxForm = copyObject(form);
     auxForm[index].value = value;
     auxForm[index].error = '';
+    auxForm = updateForm(auxForm, value, index);
     setForm(auxForm);
+  }
+
+  const updateForm = (auxForm, value, index) => {
+    if (auxForm[index].key === 'animal_specie_id') {
+      if (!value) {
+        setFilteredBreeds(breeds);
+      } else {
+        setFilteredBreeds(breeds.filter(
+          (breed) => breed.animal_specie_id === value
+        ))
+
+        let breedIndex = auxForm.findIndex(
+          (field) => field.key === 'breed_id'
+        );
+        if (breeds.find((breed) => breed.id === auxForm[breedIndex].value)?.animal_specie_id !== value)
+          auxForm[breedIndex].value = null;
+      }
+    }
+    
+    if (auxForm[index].key === 'province_id') {
+      if (!value) {
+        setFilteredCities(cities);
+      } else {
+        setFilteredCities(cities.filter(
+          (city) => city.province_id === value
+        ))
+
+        let cityIndex = auxForm.findIndex(
+          (field) => field.key === 'city_id'
+        );
+        if (cities.find((city) => city.id === auxForm[cityIndex].value)?.province_id !== value)
+          auxForm[cityIndex].value = null;
+      }
+    }
+
+    return auxForm;
   }
 
   const onSubmitHandler = async (event, form) => {

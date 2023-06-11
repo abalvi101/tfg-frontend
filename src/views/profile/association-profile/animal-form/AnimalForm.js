@@ -362,7 +362,7 @@ export default ({ className, onSuccess }) => {
           (breed) => breed.animal_specie_id === value
         ))
 
-        let breedIndex = form.findIndex(
+        let breedIndex = auxForm.findIndex(
           (field) => field.key === 'breed_id'
         );
         if (breeds.find((breed) => breed.id === auxForm[breedIndex].value)?.animal_specie_id !== value)
@@ -378,7 +378,7 @@ export default ({ className, onSuccess }) => {
           (city) => city.province_id === value
         ))
 
-        let cityIndex = form.findIndex(
+        let cityIndex = auxForm.findIndex(
           (field) => field.key === 'city_id'
         );
         if (cities.find((city) => city.id === auxForm[cityIndex].value)?.province_id !== value)
