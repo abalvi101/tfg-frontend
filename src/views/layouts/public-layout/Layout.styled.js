@@ -130,7 +130,13 @@ const Layout = styled(UnstyledLayout)`
     position: absolute
   }
 
-  @media only screen and (max.-width: 656px) {
+  @media only screen and (max-width: 426px) {
+    .notifications {
+      width: 300px;
+    }
+  }
+
+  @media only screen and (max-width: 656px) {
     .pad {
       width: 25px;
       height: 27px;

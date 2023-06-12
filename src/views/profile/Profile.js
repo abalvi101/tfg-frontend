@@ -3,13 +3,14 @@ import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
 import { ENDPOINTS } from "../../consts/api";
-import { useAuth } from "../../hooks"
+import { useAppState, useAuth } from "../../hooks"
 import { getBase64StringFromImage } from "../../utils";
 import ProfileImage from "../../components/common/profile-image/ProfileImage.styled";
 import AssociationProfile from "./association-profile/AssociationProfile.styled";
 import UserProfile from "./user-profile/UserProfile.styled";
 
 export default ({ className, }) => {
+  const [appState, appStateUpdate] = useAppState();
   const [user, userUpdate] = useAuth();
   const [userInfo, setUserInfo] = useState({});
   const [image, setImage] = useState(null);

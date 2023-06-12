@@ -7,6 +7,7 @@ const Notification = styled(UnstyledNotification)`
   transition: left 0.6s ease-in, opacity 0.5s ease-in;
   height: 46px;
   width: 100%;
+  box-shadow: -1px 2px 3px rgba(0,0,0,0.3);
 
   .color-bar {
     width: 8px;
@@ -22,6 +23,10 @@ const Notification = styled(UnstyledNotification)`
   .info {
     padding: 8px 16px;
     font-size: 12px;
+  }
+
+  @media only screen and (max-width: 425px) {
+    
   }
 `;
 

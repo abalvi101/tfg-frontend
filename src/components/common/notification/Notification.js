@@ -9,10 +9,10 @@ export const Notification = ({ className, type, message, onClose, index, total }
     setOpacity('1');
     setTimeout(() => {
       setLeft('100%');
-    }, 3000);
+    }, 399000);
     setTimeout(() => {
       onClose();
-    }, 3800);
+    }, 399800);
   }, []);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export const Notification = ({ className, type, message, onClose, index, total }
     <div className={className} style={{left, opacity, bottom}}>
       <span className="color-bar" />
       <div className="info">
-        <header>{type}</header>
+        <header>{type === 'success' ? 'Success' : type === 'error' ? 'Error' : ''}</header>
         <div>{message}</div>
       </div>
     </div>

@@ -5,8 +5,10 @@ import { ENDPOINTS } from "../../../consts/api";
 import AnimalCard from "../../../components/common/animal-card"
 import Button from "../../../components/common/button";
 import AnimalForm from "./animal-form/AnimalForm.styled";
+import { useAppState } from "../../../hooks";
 
 export default ({ className, association, refresh }) => {
+  const [appState, appStateUpdate] = useAppState();
   const navigate = useNavigate();
   const [aboutUs, setAboutUs] = useState('');
 
