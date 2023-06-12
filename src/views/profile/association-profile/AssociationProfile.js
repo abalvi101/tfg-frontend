@@ -22,6 +22,10 @@ export default ({ className, association, refresh }) => {
     })
     .catch((error) => {
       console.log('Error al actualizar', error);
+      appStateUpdate.newNotification({
+        type: 'error',
+        message: 'Error, pruebe a actualizar la página.'
+      })
     })
   }
 

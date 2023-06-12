@@ -124,7 +124,13 @@ export const Adoptions = ({ className, }) => {
           setSizes(data.data);
           setFilteredSizes(data.data);
         })
-        .catch((error) => console.log('Error tamaños animales:', error));
+        .catch((error) => {
+          console.log('Error tamaños animales:', error);
+          appStateUpdate.newNotification({
+            type: 'error',
+            message: 'Error, pruebe a actualizar la pagina.'
+          });
+        });
       appStateUpdate.finishLoading();
     }
 
@@ -267,7 +273,11 @@ export const Adoptions = ({ className, }) => {
         setAnimals(data.data);
       })
       .catch((error) => {
-        console.log('error animals', error)
+        console.log('error animals', error);
+        appStateUpdate.newNotification({
+          type: 'error',
+          message: 'Error, pruebe a actualizar la página.'
+        })
       })
       .finally(() => appStateUpdate.finishLoading())
   }
@@ -291,7 +301,13 @@ export const Adoptions = ({ className, }) => {
           console.log('Error en al añadir/quitar favorito');
         }
       })
-      .catch((error) => console.log('Error en al añadir/quitar favorito', error))
+      .catch((error) => {
+        console.log('Error en al añadir/quitar favorito', error);
+        appStateUpdate.newNotification({
+          type: 'error',
+          message: 'Error al marcar como favorito.'
+        });
+      })
       .finally(() => appStateUpdate.startLoading().finishLoading())
   }
 

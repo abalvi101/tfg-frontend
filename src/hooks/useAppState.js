@@ -8,6 +8,7 @@ const useAppState = () => {
     startLoading: () => dispatch(actions.startLoading()),
     finishLoading: () => dispatch(actions.finishLoading()),
     newNotification: (notification) => dispatch(actions.newNotification(notification)),
+    deleteNotification: (notificationId) => dispatch(actions.deleteNotification(notificationId)),
   }
 
   return ([appState, update]);

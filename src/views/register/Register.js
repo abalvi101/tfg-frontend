@@ -230,6 +230,10 @@ export const Register = ({ className, }) => {
     })
     .catch((error) => {
       console.log('error', error);
+      appStateUpdate.newNotification({
+        type: 'error',
+        message: 'Error, pruebe a actualizar la página.'
+      })
     })
   }
 
@@ -240,6 +244,10 @@ export const Register = ({ className, }) => {
     })
     .catch((error) => {
       console.log('error', error);
+      appStateUpdate.newNotification({
+        type: 'error',
+        message: 'Error, pruebe a actualizar la página.'
+      })
     })
   }
 
@@ -268,22 +276,27 @@ export const Register = ({ className, }) => {
       if (data.success) {
         userUpdate.login(data.data);
         navigate('/dashboard/profile');
+        appStateUpdate.newNotification({
+          type: 'success',
+          message: 'Usuario registrado.'
+        })
       }
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
+      appStateUpdate.newNotification({
+        type: 'error',
+        message: 'Error al registrar el usuario.'
+      })
     })
     .finally(() => appStateUpdate.finishLoading())
   }
 
   const onChangeInputHandler = (value, index) => {
-    console.log({value, index});
     let auxForm = copyObject(form);
     auxForm[role][index].value = value;
     auxForm[role][index].error = '';
-    console.log({a: auxForm[role]});
     auxForm[role] = updateForm(auxForm[role], value, index);
-    console.log({b: auxForm[role]});
     setForm(auxForm);
   }
 

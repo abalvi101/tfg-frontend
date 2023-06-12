@@ -94,10 +94,18 @@ export default ({ className, animal, onSuccess }) => {
     .then(({ data }) => {
       if (data.success) {
         onSuccess();
+        appStateUpdate.newNotification({
+          type: 'success',
+          message: 'Datos de enfermedad actualizados.'
+        })
       }
     })
     .catch((error) => {
       console.log('Error al actualizar enfermedad', error);
+      appStateUpdate.newNotification({
+        type: 'error',
+        message: 'Error al actualizar la enfermedad.'
+      })
     })
     .finally(() => appStateUpdate.finishLoading())
   }
@@ -110,10 +118,18 @@ export default ({ className, animal, onSuccess }) => {
       .then(({ data }) => {
         if (data.success) {
           onSuccess();
+          appStateUpdate.newNotification({
+            type: 'success',
+            message: 'Enfermedad eliminada.'
+          })
         }
       })
       .catch((error) => {
         console.log('Error al eliminar enfermedad', error);
+        appStateUpdate.newNotification({
+          type: 'error',
+          message: 'Error al eliminar la enfermedad'
+        })
       })
       .finally(() => appStateUpdate.finishLoading())
   }

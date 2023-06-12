@@ -364,10 +364,18 @@ export default ({ className, animal, onSuccess, provinces, cities, species, bree
     .then(({ data }) => {
       if (data.success) {
         onSuccess();
+        appStateUpdate.newNotification({
+          type: 'success',
+          message: 'Datos actualizados.'
+        })
       }
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
+      appStateUpdate.newNotification({
+        type: 'error',
+        message: 'Error al actualizar los datos.'
+      })
     })
     .finally(() => appStateUpdate.finishLoading())
   }

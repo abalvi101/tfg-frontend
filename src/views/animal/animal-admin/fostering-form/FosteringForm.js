@@ -187,10 +187,18 @@ export default ({ className, animal, onSuccess, provinces, cities }) => {
     .then(({ data }) => {
       if (data.success) {
         onSuccess();
+        appStateUpdate.newNotification({
+          type: 'success',
+          message: 'Datos de acogida actualizados.'
+        })
       }
     })
     .catch((error) => {
       console.log('Error al actualizar acogida', error);
+      appStateUpdate.newNotification({
+        type: 'error',
+        message: 'Error al actualizar la acogida.'
+      })
     })
     .finally(() => appStateUpdate.finishLoading())
   }
@@ -203,10 +211,18 @@ export default ({ className, animal, onSuccess, provinces, cities }) => {
       .then(({ data }) => {
         if (data.success) {
           onSuccess();
+          appStateUpdate.newNotification({
+            type: 'success',
+            message: 'Acogida eliminada.'
+          });
         }
       })
       .catch((error) => {
         console.log('Error al eliminar acogida', error);
+        appStateUpdate.newNotification({
+          type: 'error',
+          message: 'Error al eliminar la acogida.'
+        });
       })
       .finally(() => appStateUpdate.finishLoading())
   }

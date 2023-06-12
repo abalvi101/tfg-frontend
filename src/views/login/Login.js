@@ -71,10 +71,18 @@ export const Login = ({ className, }) => {
     .then(({ data }) => {
       if (data.success) {
         userUpdate.login(data.data);
+        appStateUpdate.newNotification({
+          type: 'success',
+          message: 'Sesión iniciada.'
+        })
       }
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
+      appStateUpdate.newNotification({
+        type: 'error',
+        message: 'Error al iniciar sesión.'
+      })
     })
     .finally(() => appStateUpdate.finishLoading())
   }

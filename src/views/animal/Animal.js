@@ -27,7 +27,13 @@ const Animal = () => {
           console.log('Getting animal info:', data.message);
         }
       })
-      .catch((error) => console.log('Getting animal info', error))
+      .catch((error) => {
+        console.log('Getting animal info', error);
+        appStateUpdate.newNotification({
+          type: 'error',
+          message: 'Error, pruebe a actualizar la página.'
+        });
+      })
       .finally(() => appStateUpdate.finishLoading())
   }
 

@@ -204,6 +204,10 @@ export default ({ className, onSuccess }) => {
       })
       .catch((error) => {
         console.log('error', error);
+        appStateUpdate.newNotification({
+          type: 'error',
+          message: 'Error, pruebe a actualizar la página.'
+        })
       })
       appStateUpdate.finishLoading();
     }

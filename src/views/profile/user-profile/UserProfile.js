@@ -89,6 +89,10 @@ export default ({ className, user, refresh }) => {
       })
       .catch((error) => {
         console.log('error', error);
+        appStateUpdate.newNotification({
+          type: 'error',
+          message: 'Error, pruebe a recargar la página.'
+        })
       })
   
       await axios.get(ENDPOINTS.LOCATION.GET_CITIES)
@@ -97,6 +101,10 @@ export default ({ className, user, refresh }) => {
       })
       .catch((error) => {
         console.log('error', error);
+        appStateUpdate.newNotification({
+          type: 'error',
+          message: 'Error, pruebe a recargar la página.'
+        })
       })
       appStateUpdate.finishLoading();
     }
@@ -183,7 +191,6 @@ export default ({ className, user, refresh }) => {
   const updateForm = (auxForm, value, index) => {
     
     if (auxForm[index].key === 'province_id') {
-      console.log('province_id', value)
       if (!value) {
         setFilteredCities(cities);
       } else {
@@ -191,9 +198,6 @@ export default ({ className, user, refresh }) => {
           (city) => city.province_id === value
         ))
 
-        console.log('filter', cities.filter(
-          (city) => city.province_id === value
-        ))
         let cityIndex = form.findIndex(
           (field) => field.key === 'city_id'
         );
@@ -222,13 +226,23 @@ export default ({ className, user, refresh }) => {
     await axios.post(ENDPOINTS.AUTH.UPDATE, data)
     .then(({ data }) => {
       if (data.success) {
+        appStateUpdate.newNotification({
+          type: 'success',
+          message: 'Datos guardados correctamente'
+        })
         refresh();
       }
     })
     .catch((error) => {
       console.log(error)
+      appStateUpdate.newNotification({
+        type: 'error',
+        message: 'Error al actualizar los datos'
+      })
     })
-    .finally(() => appStateUpdate.finishLoading())
+    .finally(() => {
+      appStateUpdate.finishLoading();
+    })
   }
 
   const onLike = (event, id) => {

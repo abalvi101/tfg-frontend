@@ -53,7 +53,13 @@ export const Associations = ({ className, }) => {
           setProvinces(data.data);
           setFilteredProvinces(data.data);
         })
-        .catch((error) => console.log('Error provincias:', error));
+        .catch((error) => {
+          console.log('Error provincias:', error);
+          appStateUpdate.newNotification({
+            type: 'error',
+            message: 'Error, pruebe a actualizar la página.'
+          });
+        });
     }
 
     getData();
@@ -118,11 +124,14 @@ export const Associations = ({ className, }) => {
     await axios
       .post(ENDPOINTS.ASSOCIATION.GET_FILTERED_ASSOCIATIONS, parameters)
       .then(({data}) => {
-        console.log({associations: data.data})
         setAssociations(data.data);
       })
       .catch((error) => {
-        console.log('error listado asociaciones', error)
+        console.log('error listado asociaciones', error);
+        appStateUpdate.newNotification({
+          type: 'error',
+          message: 'Error, pruebe a actualizar la página.'
+        })
       })
       .finally(() => appStateUpdate.finishLoading())
   }
@@ -133,22 +142,6 @@ export const Associations = ({ className, }) => {
     auxFilters = updateFilters(auxFilters, value, index);
     setFilters(auxFilters);
   }
-
-  // const onLike = async (event, id) => {
-  //   event.stopPropagation();
-  //   appStateUpdate.startLoading();
-  //   await axios
-  //     .post(ENDPOINTS.AUTH.FAVOURITE, {animal_id: id})
-  //     .then(({data}) => {
-  //       if (data.success) {
-  //         getAssociations();
-  //       } else {
-  //         console.log('Error en al añadir/quitar favorito');
-  //       }
-  //     })
-  //     .catch((error) => console.log('Error en al añadir/quitar favorito', error))
-  //     .finally(() => appStateUpdate.startLoading().finishLoading())
-  // }
 
   const updateFilters = (auxFilters, value, index) => {
     

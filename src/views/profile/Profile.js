@@ -30,6 +30,10 @@ export default ({ className, }) => {
     })
     .catch((error) => {
       console.log('ERROR AUTH', error);
+      appStateUpdate.newNotification({
+        type: 'error',
+        message: 'Error, pruebe a actualizar la página.'
+      })
     })
   }
 
@@ -38,9 +42,17 @@ export default ({ className, }) => {
     .then(() => {
       setImage(null);
       getUserInfo();
+      appStateUpdate.newNotification({
+        type: 'success',
+        message: 'La imagen se ha actualizado correctamente.'
+      })
     })
     .catch((error) => {
       console.log('error submit image', error);
+      appStateUpdate.newNotification({
+        type: 'error',
+        message: 'Error al eliminar la imagen.'
+      })
     })
   }
 
@@ -52,9 +64,17 @@ export default ({ className, }) => {
           axios.post('/auth/submitImage', {image: value})
           .then(() => {
             setImage(uploadedImage);
+            appStateUpdate.newNotification({
+              type: 'success',
+              message: 'La imagen se ha actualizado correctamente.'
+            })
           })
           .catch((error) => {
             console.log('error submit image', error);
+            appStateUpdate.newNotification({
+              type: 'error',
+              message: 'Error al actualizar la imagen.'
+            })
           })
         }
       )

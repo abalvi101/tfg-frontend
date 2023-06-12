@@ -8,8 +8,12 @@ const actions = {
     type: ACTION_TYPES.FINISH_LOADING,
   }),
   newNotification: (notification) => ({
-    type: ACTION_TYPES.FINISH_LOADING,
+    type: ACTION_TYPES.NEW_NOTIFICATION,
     payload: notification,
+  }),
+  deleteNotification: (notificationId) => ({
+    type: ACTION_TYPES.DELETE_NOTIFICATION,
+    payload: notificationId,
   }),
 }
 

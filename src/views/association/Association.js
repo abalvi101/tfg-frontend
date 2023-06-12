@@ -27,7 +27,13 @@ export const Association = ({ className }) => {
           console.log('Error getting association info:', data.message);
         }
       })
-      .catch((error) => console.log('Error getting association info', error))
+      .catch((error) => {
+        console.log('Error getting association info', error);
+        appStateUpdate.newNotification({
+          type: 'error',
+          message: 'Error, pruebe a actualizar la página.'
+        });
+      })
       .finally(() => appStateUpdate.finishLoading())
   }
 
@@ -43,7 +49,13 @@ export const Association = ({ className }) => {
           console.log('Error en al añadir/quitar favorito');
         }
       })
-      .catch((error) => console.log('Error en al añadir/quitar favorito', error))
+      .catch((error) => {
+        console.log('Error en al añadir/quitar favorito', error);
+        appStateUpdate.newNotification({
+          type: 'error',
+          message: 'Error al marcar como favorito.'
+        });
+      })
       .finally(() => appStateUpdate.startLoading().finishLoading())
   }
 

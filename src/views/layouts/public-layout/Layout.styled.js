@@ -115,6 +115,21 @@ const Layout = styled(UnstyledLayout)`
     animation: walk 2s linear infinite 0.75s;
   }
 
+  .notifications {
+    width: 400px;
+    height: 0px;
+    z-index: 11;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    /* background-color: red; */
+    overflow: visible;
+  }
+  
+  .notifications > * {
+    position: absolute
+  }
+
   @media only screen and (max.-width: 656px) {
     .pad {
       width: 25px;

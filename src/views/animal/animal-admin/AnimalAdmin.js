@@ -97,12 +97,20 @@ export default ({ className, animal, refresh }) => {
           .then(({data}) => {
             if (data.success) {
               setImage(uploadedImage);
+              appStateUpdate.newNotification({
+                type: 'success',
+                message: 'Imagen actualizada.'
+              })
             } else {
               console.log('Error al actualizar la imagen.');
             }
           })
           .catch((error) => {
             console.log('Error al actualizar la imagen', error);
+            appStateUpdate.newNotification({
+              type: 'error',
+              message: 'Error al actualizar la imagen.'
+            })
           })
           .finally(() => appStateUpdate.finishLoading())
         }
@@ -118,9 +126,17 @@ export default ({ className, animal, refresh }) => {
     .then(() => {
       setImage('');
       refresh();
+      appStateUpdate.newNotification({
+        type: 'success',
+        message: 'Imagen actualizada.'
+      })
     })
     .catch((error) => {
       console.log('error submit image', error);
+      appStateUpdate.newNotification({
+        type: 'error',
+        message: 'Error al actualizar la imagen.'
+      })
     })
     .finally(() => appStateUpdate.finishLoading())
   }
