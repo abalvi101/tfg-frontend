@@ -9,10 +9,10 @@ export const Notification = ({ className, type, message, onClose, index, total }
     setOpacity('1');
     setTimeout(() => {
       setLeft('100%');
-    }, 399000);
+    }, 3000);
     setTimeout(() => {
       onClose();
-    }, 399800);
+    }, 3800);
   }, []);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
-export const apiURL = 'http://127.0.0.1/api/';
-// export const apiURL = 'https://tfg-backend-production.up.railway.app/api';
+// export const apiURL = 'http://127.0.0.1/api/';
+export const apiURL = 'https://tfg-backend-production.up.railway.app/api';
 
 export const LOCAL_STORAGE = {
   API_TOKEN: 'API_TOKEN',
