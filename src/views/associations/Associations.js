@@ -85,13 +85,6 @@ export const Associations = ({ className, }) => {
           name: 'Cualquiera',
         }
       )
-      auxFilters[index].options.unshift(
-        {
-          key: null,
-          value: null,
-          name: 'Cualquiera',
-        }
-      )
       setFilters(auxFilters);
     }
   }, [filteredProvinces])
