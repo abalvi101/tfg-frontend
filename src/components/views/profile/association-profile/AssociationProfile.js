@@ -50,23 +50,24 @@ export default ({ className, association, refresh }) => {
       <AnimalForm onSuccess={refresh}/>
       
       {
-        association.animals?.length && 
-        <section className="animals">
-          <h4>Animales en adopción</h4>
-          <div className="animals_list">
-            {
-              association.animals?.map(
-                (animal) => (
-                  <AnimalCard
-                    animal={animal}
-                    key={animal.id}
-                    onClick={() => navigate(`/animal/${animal.id}`)}
-                  />
+        association.animals?.length
+        ? <section className="animals">
+            <h4>Animales en adopción</h4>
+            <div className="animals_list">
+              {
+                association.animals?.map(
+                  (animal) => (
+                    <AnimalCard
+                      animal={animal}
+                      key={animal.id}
+                      onClick={() => navigate(`/animal/${animal.id}`)}
+                    />
+                  )
                 )
-              )
-            }
-          </div>
-        </section>
+              }
+            </div>
+          </section>
+        : null
       }
     </div>
   )
