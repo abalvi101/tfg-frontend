@@ -9,7 +9,7 @@ import ProfileImage from "../../components/common/profile-image/ProfileImage.sty
 import AssociationProfile from "./association-profile/AssociationProfile.styled";
 import UserProfile from "./user-profile/UserProfile.styled";
 
-export default ({ className, }) => {
+export default ({ className,  themeLight }) => {
   const [appState, appStateUpdate] = useAppState();
   const [user, userUpdate] = useAuth();
   const [userInfo, setUserInfo] = useState({});
@@ -104,9 +104,9 @@ export default ({ className, }) => {
       <section className="info">
         {
           user.role === 'user'
-            ? <UserProfile user={userInfo} refresh={getUserInfo} />
+            ? <UserProfile themeLight={themeLight} user={userInfo} refresh={getUserInfo} />
             : user.role === 'association'
-              ? <AssociationProfile association={userInfo} refresh={getUserInfo} />
+              ? <AssociationProfile themeLight={themeLight} association={userInfo} refresh={getUserInfo} />
               : null
         }
       </section>

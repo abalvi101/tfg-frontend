@@ -59,7 +59,7 @@ function App() {
           children: [
             {
               path: "",
-              element: <Profile />,
+              element: <Profile themeLight={theme} />,
             },
           ]
         },
@@ -69,7 +69,7 @@ function App() {
         },
         {
           path: "/asociacion/:associationID",
-          element: <Association />,
+          element: <Association themeLight={theme} />,
         },
       ]
     }

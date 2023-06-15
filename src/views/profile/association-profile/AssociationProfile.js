@@ -7,7 +7,7 @@ import Button from "../../../components/common/button";
 import AnimalForm from "./animal-form/AnimalForm.styled";
 import { useAppState } from "../../../hooks";
 
-export default ({ className, association, refresh }) => {
+export default ({ className, association, refresh, themeLight }) => {
   const [appState, appStateUpdate] = useAppState();
   const navigate = useNavigate();
   const [aboutUs, setAboutUs] = useState('');
@@ -47,11 +47,11 @@ export default ({ className, association, refresh }) => {
         >
           Actualizar
         </Button>
+        <p>
+          Esta asociación se encuentra en {association.city}, {association.province}.
+        </p>
       </section>
 
-      <section>
-        Esta asociación se encuentra en {association.city}, {association.province}.
-      </section>
 
       <AnimalForm onSuccess={refresh}/>
       
@@ -67,6 +67,7 @@ export default ({ className, association, refresh }) => {
                       animal={animal}
                       key={animal.id}
                       onClick={() => navigate(`/animal/${animal.id}`)}
+                      themeLight={themeLight}
                     />
                   )
                 )

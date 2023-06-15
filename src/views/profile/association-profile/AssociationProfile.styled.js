@@ -4,7 +4,7 @@ import UnstyledAssociationProfile from './AssociationProfile';
 const AssociationProfile = styled(UnstyledAssociationProfile)`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 46px;
 
   .about_us {
     display: flex;

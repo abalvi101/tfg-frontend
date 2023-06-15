@@ -8,7 +8,7 @@ import Button from "../../../components/common/button"
 import Input from "../../../components/common/input"
 import { useAppState } from "../../../hooks"
 
-export default ({ className, user, refresh }) => {
+export default ({ className, user, refresh, themeLight }) => {
   const [appState, appStateUpdate] = useAppState();
   const navigate = useNavigate();
   const [form, setForm] = useState([
@@ -305,6 +305,7 @@ export default ({ className, user, refresh }) => {
                   key={animal.id}
                   onClick={() => navigate(`/animal/${animal.id}`)}
                   onLike={(event) => onLike(event, animal.id)}
+                  themeLight={themeLight}
                 />
               )
             )

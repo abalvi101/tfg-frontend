@@ -5,7 +5,7 @@ import AnimalCard from "../../components/common/animal-card";
 import { ENDPOINTS } from "../../consts/api";
 import { useAppState } from "../../hooks";
 
-export const Association = ({ className }) => {
+export const Association = ({ className, themeLight }) => {
   
   const navigate = useNavigate();
   const { associationID } = useParams();
@@ -98,6 +98,7 @@ export const Association = ({ className }) => {
                   key={animal.id}
                   onClick={() => navigate(`/animal/${animal.id}`)}
                   onLike={(event) => onLike(event, animal.id)}
+                  themeLight={themeLight}
                 />
               )
             )
