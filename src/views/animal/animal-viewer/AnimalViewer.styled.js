@@ -45,6 +45,17 @@ const AnimalViewer = styled(UnstyledAnimalViewer)`
     flex-direction: column;
     gap: 0.2rem;
   }
+  .info > section:last-child {
+    margin-top: 16px;
+  }
+  .disease {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .disease .disease-name {
+    font-weight: bold;
+  }
 
 
   @media only screen and (max-width: 1024px) {
@@ -65,6 +76,9 @@ const AnimalViewer = styled(UnstyledAnimalViewer)`
     }
     .info > section:nth-child(2) {
       grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+    .info > section:last-child {
+      margin-top: 0px;
     }
   }
 `

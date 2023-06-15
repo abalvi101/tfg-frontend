@@ -44,8 +44,6 @@ export default ({ className, animal }) => {
             <h4>Tamaño</h4>
             <span>{animal.size?.name}</span>
           </div>
-        {/* </section>
-        <section> */}
           <div>
             <h4>Género</h4>
             <span>
@@ -66,8 +64,6 @@ export default ({ className, animal }) => {
             <h4>Fecha de entrada</h4>
             <span>{animal.entry_date ?? 'Sin datos'}</span>
           </div>
-        {/* </section>
-        <section> */}
           <div>
             <h4>Peso</h4>
             <span>{animal.weight ?? 'Sin datos'}</span>
@@ -89,6 +85,14 @@ export default ({ className, animal }) => {
             </span>
           </div>
         </section>
+        {
+          animal.disease &&
+          <section className="disease">
+            <span>{animal.name} tiene una enfermedad {animal.disease.chronic ? 'crónica' : 'pasajera'}:</span>
+            <p><span className='disease-name'>{animal.disease.name}</span>: {animal.disease.description}</p>
+            <p>Su tratamiento es: {animal.disease.treatment}</p>
+          </section>
+        }
       </section>
     </div>
   )
