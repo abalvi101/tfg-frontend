@@ -1,9 +1,10 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import Button from "../../../components/common/button";
+import Logo from "../../../components/common/logo/Logo.styled";
 import { useAuth, useClickOutside } from "../../../hooks";
 
-export const Header = ({ className, themeLight, setTheme }) => {
+export const Header = ({ className, themeLight, setTheme, theme }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [user, userUpdate] = useAuth();
@@ -57,7 +58,8 @@ export const Header = ({ className, themeLight, setTheme }) => {
   return (
     <header className={className}>
       <div className="brand">
-        <img src="/LogoWhite.svg" />
+        {/* <img src="/LogoWhite.svg" /> */}
+        <Logo width={64} color={'font'} />
         <h1 onClick={() => navigate('/')}>ADOGTANOS</h1>
       </div>
       

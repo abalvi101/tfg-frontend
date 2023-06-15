@@ -20,6 +20,9 @@ const AnimalCard = styled(UnstyledAnimalCard)`
   section.card-info * {
     font-size: 14px;
   }
+  /* .gender {
+    content: url('/icons/male.svg');
+  } */
 
   img.imagen {
     border-radius: 6px 6px 0 0;

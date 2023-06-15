@@ -1,3 +1,5 @@
+import Logo from "../../../components/common/logo/Logo.styled"
+
 export const Footer = ({ className, }) => {
   return (
     <footer className={className}>
@@ -8,7 +10,8 @@ export const Footer = ({ className, }) => {
           <img className="icon twitter" src="/icons/twitter.svg"/>
         </section>
         <section className="brand">
-          <img src="/LogoWhite.svg" alt="Logo de Adogtanos"/>
+          {/* <img src="/LogoWhite.svg" alt="Logo de Adogtanos"/> */}
+          <Logo width={160} color='black' />
           <h2>Adogtanos</h2>
         </section>
         <section className="links">

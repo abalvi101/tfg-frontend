@@ -39,7 +39,7 @@ function App() {
         },
         {
           path: "/adopciones",
-          element: <Adoptions />,
+          element: <Adoptions themeLight={theme} />,
         },
         {
           path: "/asociaciones",

@@ -9,7 +9,7 @@ import Button from "../../components/common/button";
 import Input from "../../components/common/input";
 import { useAppState } from "../../hooks";
 
-export const Adoptions = ({ className, }) => {
+export const Adoptions = ({ className, themeLight, }) => {
 
   const navigate = useNavigate();
   const [appState, appStateUpdate] = useAppState();
@@ -378,6 +378,7 @@ export const Adoptions = ({ className, }) => {
                 key={animal.id}
                 onClick={() => navigate(`/animal/${animal.id}`)}
                 onLike={(event) => onLike(event, animal.id)}
+                themeLight={themeLight}
               />
             )
           )

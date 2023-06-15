@@ -1,4 +1,4 @@
-export const AnimalCard = ({ className, animal, onClick, onLike }) => {
+export const AnimalCard = ({ className, animal, onClick, onLike, themeLight }) => {
   return (
     <section className={className} onClick={onClick}>
       <img
@@ -9,7 +9,17 @@ export const AnimalCard = ({ className, animal, onClick, onLike }) => {
         <header>
           <div>
             <h3>{animal.name}</h3>
-            <img src={`/icons/${animal.gender ? 'male' : 'female'}.svg`} />
+            <img className='gender' 
+            src={`/icons/${
+              animal.gender
+                ? themeLight
+                  ? 'male'
+                  : 'male-dark'
+                : themeLight
+                  ? 'female'
+                  : 'female-dark'
+              }.svg`}
+            />
           </div>
           {
             animal.favourite !== null
