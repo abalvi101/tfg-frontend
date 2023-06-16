@@ -17,7 +17,6 @@ const finishLoading = (state) => {
 }
 
 const newNotification = (state, payload) => {
-  console.log('adding');
   let auxState = {...state}
   // console.log({payload, noti: auxState.notification, last: auxState.notification[auxState.notification.length -1]})
   auxState.notification.push({
@@ -28,7 +27,6 @@ const newNotification = (state, payload) => {
 }
 
 const deleteNotification = (state, notificationId) => {
-  console.log('deleting');
   let auxState = {...state}
   auxState.notification = auxState.notification.filter(
     (notification) => notification.id !== notificationId
@@ -38,7 +36,6 @@ const deleteNotification = (state, notificationId) => {
 
 const appStateReducer = (state, action) => {
   const {type, payload} = action;
-  console.log({type, payload})
 
   switch (type) {
     case ACTION_TYPES.START_LOADING:
